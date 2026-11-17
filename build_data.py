@@ -39,11 +39,13 @@ RESOURCES = {
 # dated sessions and not which program runs in each slot.
 EARLYON_CAT = "Early Years"
 EARLYON_TYPE = "EarlyON"
-EARLYON_TITLE = "EarlyON drop-in"
+EARLYON_TITLE = "EarlyON drop-in hours"   # hours the centre is open, not one named program
 EARLYON_AGE_MAX = 6
 EARLYON_AGE_NOTE = "Ages 0–6 + caregiver"   # kept short: the tag does not wrap on a phone
 EARLYON_PAGE = ("https://www.toronto.ca/community-people/children-parenting/children-programs-activities/"
                 "child-family-programs-and-groups/child-family-programs/")
+# The two school boards run almost half the centres and post their own EarlyON calendars.
+SCHOOL_BOARDS = {"toronto district school board": "TDSB", "toronto catholic district school board": "TCDSB"}
 EARLYON_MIN_CENTRES = 50   # fewer than this with readable hours means the file changed shape
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -267,6 +269,9 @@ def earlyon_notes(p, name):
         generic = ("earlyon" in b or "child and family" in b or b == "commercial storefront")
         if not generic and b not in name.lower() and name.lower().replace(" earlyon", "") not in b:
             notes.append("In " + building)
+    board = SCHOOL_BOARDS.get((none(p.get("agency")) or "").strip().lower())
+    if board:
+        notes.append("Run by " + board)
     if p.get("indigenous_program") == "Yes":
         notes.append("Indigenous program")
     if p.get("french_language_program") == "Yes":

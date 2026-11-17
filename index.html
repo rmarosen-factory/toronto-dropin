@@ -49,7 +49,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .mast-text{display:flex;flex-direction:column;gap:7px;min-width:0;padding-bottom:20px}
 .mast h1{margin:0;font-family:var(--display);font-weight:800;font-size:34px;line-height:1.04;letter-spacing:-.01em;text-wrap:balance}
 .mast h1 span{white-space:nowrap;text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--act);text-decoration-thickness:3px;text-underline-offset:5px}
-.tag-line{margin:0;font-weight:700;font-size:16px;color:var(--ink-2)}
+.tag-line{margin:0;font-weight:700;font-size:16px;color:var(--ink-2);text-wrap:balance}
 .tag-line mark{display:inline-block;background:var(--act);color:var(--on-act);font-family:var(--display);font-weight:700;padding:1px 8px 0;border-radius:8px;transform:rotate(-2deg)}
 .mascot{flex:none;width:104px;height:auto;transform-origin:50% 90%;animation:bob 3.4s ease-in-out infinite}
 .mascot .acc{display:none}
@@ -121,7 +121,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .ticks{position:relative;height:14px;font-size:11px;font-weight:700;color:var(--ink-2)}
 .ticks span{position:absolute;top:0;transform:translateX(-50%)}
 .sessions{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.sessions li{display:grid;grid-template-columns:9.8em minmax(0,1fr);gap:2px 10px;padding:8px 0;border-top:2px dashed var(--sunken);align-items:baseline}
+.sessions li{display:grid;grid-template-columns:9.8em minmax(0,1fr) auto;gap:2px 10px;padding:8px 0;border-top:2px dashed var(--sunken);align-items:baseline}
 .sessions li.past{opacity:.5}
 .time{font-family:var(--display);font-size:16px;font-weight:700;white-space:nowrap}
 .what{min-width:0;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
@@ -137,11 +137,54 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .empty p{margin:0}
 .empty .big{font-family:var(--display);font-size:20px;font-weight:700;line-height:1.25}
 .more{align-self:center}
+
+/* views, favourites, plan */
+[hidden]{display:none!important}
+.ic{width:1.1em;height:1.1em;flex:none;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.ic.solid{fill:currentColor}
+.tabs{display:flex;gap:7px}
+.tab{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:7px 10px 5px;font-family:var(--display);font-size:17px;font-weight:700;line-height:1.2;white-space:nowrap;transition:transform .12s ease}
+.tab:hover{transform:rotate(-1.5deg) scale(1.03)}
+.tab[aria-pressed="true"]{background:var(--act);color:var(--on-act);box-shadow:3px 3px 0 var(--edge);transform:rotate(-1.5deg)}
+.count{min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--ink);color:var(--bg);font-family:var(--body);font-size:12px;font-weight:800;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.tab[aria-pressed="true"] .count{background:var(--on-act);color:var(--act)}
+.chip.ico{display:inline-flex;align-items:center;gap:6px}
+a.chip{display:inline-block;text-decoration:none}
+.heart,.row-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0;background:var(--surface);border:2px solid var(--edge);border-radius:50%;transition:transform .12s ease}
+.heart{width:34px;height:34px;font-size:16px;margin-left:auto}
+.heart:hover{transform:rotate(-8deg) scale(1.08)}
+.heart[aria-pressed="true"]{background:var(--fit);color:var(--on-act);box-shadow:2px 2px 0 var(--edge)}
+.place-head h3{flex:1 1 auto}
+.place-head h3 small{display:block;font-family:var(--body);font-size:14px;font-weight:700;color:var(--ink-2);margin-top:2px}
+.row-btn{width:32px;height:32px;font-size:15px;align-self:center}
+.row-btn.on{background:var(--act);color:var(--on-act)}
+.row-btn[aria-expanded="true"]{box-shadow:2px 2px 0 var(--edge)}
+.row-btn[aria-expanded="true"]:not(.on){transform:rotate(45deg)}
+.what .name .ic{width:.85em;height:.85em;margin-left:5px;vertical-align:-.05em;color:var(--fit);stroke:var(--edge);stroke-width:2.2}
+.what .at{flex-basis:100%;color:var(--ink-2);font-size:14px}
+.tag.mine{background:var(--act);color:var(--on-act)}
+.tray{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:7px;align-items:center;background:var(--sunken);border-radius:14px;padding:10px;margin-top:6px}
+.cal{flex-basis:100%;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.cal .label{flex-basis:100%;margin-top:3px}
+.mini{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;padding-top:3px}
+.mini .link{text-decoration-color:var(--act);text-decoration-thickness:3px}
+.note{margin:0;font-size:13.5px;font-weight:700;background:var(--soon-soft);color:var(--soon);border-radius:10px;padding:6px 10px}
+.favs,.plan{display:flex;flex-direction:column;gap:14px}
+.sec{margin:6px 0 -6px;font-family:var(--display);font-size:20px;font-weight:700;line-height:1.2}
+.week{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.week li{display:grid;grid-template-columns:4.4em minmax(0,1fr);gap:4px 10px;padding:8px 0;border-top:2px dashed var(--sunken);align-items:baseline}
+.week .dow{font-family:var(--display);font-size:15.5px;font-weight:700;white-space:nowrap}
+.slot{font-family:var(--display)}
+.plan-top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.plan-top .big{margin:0 auto 0 0;font-family:var(--display);font-size:20px;font-weight:700;line-height:1.25}
+.toast{position:fixed;left:50%;bottom:max(16px, env(safe-area-inset-bottom, 0px));transform:translateX(-50%) rotate(-1deg);z-index:5;width:max-content;max-width:calc(100vw - 32px);
+  background:var(--ink);color:var(--bg);border:2px solid var(--edge);border-radius:18px;padding:9px 16px;font-size:14.5px;font-weight:800;display:flex;gap:14px;align-items:center;box-shadow:3px 3px 0 var(--act)}
+.toast button{background:none;border:none;padding:0;color:inherit;font-weight:800;white-space:nowrap;text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:3px}
 .foot{color:var(--ink-2);font-size:13px;max-width:65ch;display:flex;flex-direction:column;gap:6px}
 .foot p{margin:0}
 @media (prefers-reduced-motion:reduce){
   .mascot,.tag.live::before{animation:none}
-  .chip,.day{transition:none}
+  .chip,.day,.tab,.heart,.row-btn{transition:none}
 }
 @media (max-width:520px){
   .page{gap:15px;padding-block:12px 40px}
@@ -155,8 +198,15 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
   .day small{font-size:10px;letter-spacing:0}
   .day span{font-size:19px}
   .opts{gap:11px 18px}
-  .sessions li{grid-template-columns:9.2em minmax(0,1fr)}
+  /* phone: time on its own line so the name and tags get the full width */
+  .sessions li{grid-template-columns:minmax(0,1fr) auto}
+  .sessions .time{grid-column:1;grid-row:1}
+  .sessions .what{grid-column:1;grid-row:2}
+  .sessions .row-btn{grid-column:2;grid-row:1/span 2}
+  .sessions .tray,.sessions .mini{grid-row:3}
   .time{font-size:14.5px}
+  .tab{font-size:15.5px;padding:6px 8px 4px}
+  .sec{font-size:18.5px}
 }
 </style>
 
@@ -165,7 +215,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
     <div class="mast-row">
       <div class="mast-text">
         <h1>Toronto <span>Drop-In</span> Finder</h1>
-        <p class="tag-line">Where can I just show up and <mark id="verb">swim</mark>?</p>
+        <p class="tag-line" id="tagline">Where can I just show up and <mark>swim</mark>?</p>
       </div>
       <svg class="mascot" viewBox="0 -6 120 118" aria-hidden="true">
         <g stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
@@ -224,6 +274,8 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
     <div class="waves" aria-hidden="true"></div>
   </header>
 
+  <nav class="tabs" id="tabs" aria-label="Views"></nav>
+
   <section class="origin" aria-label="Starting point">
     <button class="origin-btn" id="origin-btn" type="button" aria-expanded="false" aria-controls="loc-panel">
       <span class="where"><span class="label">Starting from</span><strong id="origin-label">City Hall</strong></span>
@@ -253,8 +305,11 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
   <div class="notice" id="notice" hidden></div>
   <div class="summary" id="summary"><p>Loading the schedule…</p></div>
   <section class="results" id="results" aria-live="polite"></section>
+  <section class="favs" id="favs" aria-label="Favourites" hidden></section>
+  <section class="plan" id="plan" aria-label="My plan" hidden></section>
 
   <footer class="foot" id="foot"></footer>
+  <div class="toast" id="toast" role="status" hidden></div>
 </div>
 
 <script>
@@ -265,7 +320,17 @@ var CITY_HALL={label:'City Hall',lat:43.6534,lng:-79.3841,isDefault:true};
 var RADII=[2,5,10,0];
 var D=null, byDay=new Map(), catTypes=[], lastDay=0;
 var P=null, placesPromise=null, curSugs=[];
-var S={cat:0,types:[],day:0,radius:5,age:null,sort:'near',showPast:false,moreTypes:false,limit:30,origin:CITY_HALL,recents:[]};
+// favP: favourite places. favA: one activity at one place. plan: dated sessions the visitor picked.
+// All three are kept by stable names and ids, never by position in the data, because the data is rebuilt twice a week.
+var S={cat:0,types:[],day:0,radius:5,age:null,sort:'near',showPast:false,moreTypes:false,limit:30,origin:CITY_HALL,recents:[],
+  view:'find',favP:[],favA:[],plan:[],open:null,expand:{}};
+var SAVED=['cat','types','radius','age','sort','origin','recents','favP','favA','plan'];
+var SESS=new Map(), locByKey=new Map();
+// Inside a Claude artifact a page cannot hand over a calendar file, so only the Google link is offered there.
+var CAN_FILE=!(window.claude&&typeof window.claude.use==='function');
+var NS='http://www.w3.org/2000/svg';
+var ICONS={heart:'M12 20.5C5.5 15.6 3 12.2 3 8.7 3 6 5.1 4 7.6 4c1.8 0 3.4 1 4.4 2.6C13 5 14.6 4 16.4 4 18.9 4 21 6 21 8.7c0 3.5-2.5 6.9-9 11.8z',
+  plus:'M12 5v14M5 12h14',check:'M5 12.5l5 5L19.5 7',cal:'M4 7h16v13H4zM4 11.5h16M8.5 4v5M15.5 4v5',x:'M6 6l12 12M18 6L6 18'};
 
 function $(s){return document.querySelector(s);}
 function h(tag,props){
@@ -286,18 +351,41 @@ function add(e,kid){
   if(Array.isArray(kid)){kid.forEach(function(x){add(e,x);});return;}
   e.appendChild(kid.nodeType?kid:document.createTextNode(String(kid)));
 }
+function icon(name,solid){
+  var s=document.createElementNS(NS,'svg'), p=document.createElementNS(NS,'path');
+  s.setAttribute('viewBox','0 0 24 24'); s.setAttribute('class','ic'+(solid?' solid':'')); s.setAttribute('aria-hidden','true');
+  p.setAttribute('d',ICONS[name]); s.appendChild(p); return s;
+}
 
 /* ---------- state ---------- */
 function loadState(){
   try{
     var j=JSON.parse(localStorage.getItem(LS_KEY)||'null');
-    if(j&&typeof j==='object') ['cat','types','radius','age','sort','origin','recents'].forEach(function(k){ if(k in j) S[k]=j[k]; });
+    if(j&&typeof j==='object') SAVED.forEach(function(k){ if(k in j) S[k]=j[k]; });
   }catch(e){}
 }
 function saveState(){
-  try{ localStorage.setItem(LS_KEY,JSON.stringify({cat:S.cat,types:S.types,radius:S.radius,age:S.age,sort:S.sort,origin:S.origin,recents:S.recents})); }catch(e){}
+  var o={}; SAVED.forEach(function(k){ o[k]=S[k]; });
+  try{ localStorage.setItem(LS_KEY,JSON.stringify(o)); }catch(e){}
 }
 function validPoint(o){ return o&&typeof o.label==='string'&&isFinite(o.lat)&&isFinite(o.lng); }
+function list(v){ return Array.isArray(v)?v:[]; }
+function str(v){ return typeof v==='string'&&v.length>0&&v.length<300; }
+function validateSaved(today){
+  var seen={}, once=function(k){ if(seen[k]) return false; seen[k]=1; return true; };
+  var name=function(f){ var i=locByKey.get(f.k); if(i!=null) f.n=D.locs[i][1]; return f; };
+  S.favP=list(S.favP).filter(function(f){ return f&&str(f.k)&&str(f.n)&&once('p'+f.k); }).slice(0,60)
+    .map(function(f){ return name({k:f.k,n:f.n}); });
+  S.favA=list(S.favA).filter(function(f){ return f&&str(f.k)&&str(f.n)&&str(f.t)&&once('a'+f.k+'|'+f.t); }).slice(0,60)
+    .map(function(f){ return name({k:f.k,n:f.n,t:f.t}); });
+  // a plan is for what is coming up: days that have passed drop off
+  S.plan=list(S.plan).filter(function(p){
+    return p&&typeof p.d==='string'&&/^\d{4}-\d\d-\d\d$/.test(p.d)&&dayNum(p.d)>=today&&str(p.k)&&str(p.n)&&str(p.t)
+      &&p.s>=0&&p.s<1440&&p.e>p.s&&p.e<=2880&&once('s'+evKey(p));
+  }).slice(0,200).map(function(p){
+    return {d:p.d,k:p.k,n:p.n,a:str(p.a)?p.a:'',t:p.t,s:Math.round(p.s),e:Math.round(p.e),g:str(p.g)?p.g:''};
+  });
+}
 function validate(){
   if(!(S.cat>=0&&S.cat<D.cats.length)) S.cat=0;
   if(!Array.isArray(S.types)) S.types=[];
@@ -308,6 +396,7 @@ function validate(){
   if(!validPoint(S.origin)) S.origin=CITY_HALL;
   if(!Array.isArray(S.recents)) S.recents=[];
   S.recents=S.recents.filter(validPoint).slice(0,5);
+  validateSaved(dayNum(torontoNow().date));
 }
 
 /* ---------- time ---------- */
@@ -322,6 +411,8 @@ function fmtDate(n,opts){ opts.timeZone='UTC'; return dateOf(n).toLocaleDateStri
 function clock(m){ var hh=Math.floor(m/60)%24, mm=m%60; return {t:(hh%12||12)+':'+(mm<10?'0':'')+mm, ap:hh<12?'am':'pm'}; }
 function span(a,b){ var x=clock(a), y=clock(b); return x.ap===y.ap ? x.t+'–'+y.t+' '+y.ap : x.t+' '+x.ap+'–'+y.t+' '+y.ap; }
 function at(m){ var x=clock(m); return x.t+' '+x.ap; }
+function isoOf(n){ return dateOf(n).toISOString().slice(0,10); }
+function dow(n){ return fmtDate(n,{weekday:'short'}).replace('.',''); }
 
 /* ---------- distance ---------- */
 function km(a,b,c,d){
@@ -347,6 +438,86 @@ function index(){
   });
   catTypes=tc.map(function(m){ return Array.from(m.entries()).sort(function(a,b){return b[1]-a[1];}).map(function(x){return x[0];}); });
   lastDay=0; byDay.forEach(function(_,k){ if(k>lastDay) lastDay=k; });
+  locByKey=new Map();
+  D.locs.forEach(function(L,i){ var k=locKey(L); if(!locByKey.has(k)) locByKey.set(k,i); });
+}
+
+/* ---------- favourites and plan ---------- */
+// EarlyON centres (10 fields) and recreation centres (8) are numbered separately by the city, so the key says which list.
+function locKey(L){ return (L.length>8?'e':'r')+L[0]; }
+function evOf(iso,L,c,r){ return {d:iso,k:locKey(L),n:L[1],a:L[4]||'',t:c[0],s:r[2],e:r[3],g:c[4]||ageLabel(r[4],r[5])}; }
+function evKey(p){ return [p.d,p.k,p.t,p.s,p.e].join('|'); }
+function planAt(key){ for(var i=0;i<S.plan.length;i++) if(evKey(S.plan[i])===key) return i; return -1; }
+function favPAt(k){ for(var i=0;i<S.favP.length;i++) if(S.favP[i].k===k) return i; return -1; }
+function favAAt(k,t){ for(var i=0;i<S.favA.length;i++) if(S.favA[i].k===k&&S.favA[i].t===t) return i; return -1; }
+function where(p){ return [p.n,p.a,'Toronto, ON'].filter(Boolean).join(', '); }
+function mapsUrl(p){ return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(where(p)); }
+
+/* ---------- calendar ---------- */
+var TZF=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+function wallClock(ms){
+  var p={}; TZF.formatToParts(new Date(ms)).forEach(function(x){p[x.type]=x.value;});
+  return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute);
+}
+// A Toronto date and time of day as a UTC stamp, right in both winter and summer time.
+function utcStamp(dn,mins){
+  var wall=dn*864e5+mins*6e4, guess=wall+5*36e5, utc=guess-(wallClock(guess)-wall);
+  return new Date(utc).toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+}
+function evNote(p){
+  return 'Drop-in at '+p.n+(p.g?' ('+p.g+')':'')+'. From the City of Toronto’s posted schedule, which can change. Check with the centre before you go.';
+}
+function gcal(p){
+  var dn=dayNum(p.d), q=encodeURIComponent;
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+q(p.t)+'&dates='+utcStamp(dn,p.s)+'/'+utcStamp(dn,p.e)
+    +'&location='+q(where(p))+'&details='+q(evNote(p));
+}
+function icsText(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n'); }
+function fold(line){   // calendar files allow 75 bytes a line; longer ones continue on the next, after a space
+  var out='', cur='', n=0;
+  Array.from(line).forEach(function(ch){
+    var c=ch.codePointAt(0), len=c<0x80?1:c<0x800?2:c<0x10000?3:4;
+    if(n+len>73){ out+=cur+'\r\n '; cur=''; n=1; }
+    cur+=ch; n+=len;
+  });
+  return out+cur;
+}
+function uid(p){
+  var s=evKey(p), hsh=5381, i;
+  for(i=0;i<s.length;i++) hsh=((hsh*33)^s.charCodeAt(i))>>>0;
+  return 'tdf-'+p.d.replace(/-/g,'')+'-'+p.s+'-'+hsh.toString(36)+'@toronto-drop-in-finder';
+}
+function icsFile(evs){
+  var stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  var out=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Toronto Drop-In Finder//EN','CALSCALE:GREGORIAN'];
+  evs.forEach(function(p){
+    var dn=dayNum(p.d);
+    out.push('BEGIN:VEVENT','UID:'+uid(p),'DTSTAMP:'+stamp,'DTSTART:'+utcStamp(dn,p.s),'DTEND:'+utcStamp(dn,p.e),
+      'SUMMARY:'+icsText(p.t),'LOCATION:'+icsText(where(p)),'DESCRIPTION:'+icsText(evNote(p)),'END:VEVENT');
+  });
+  out.push('END:VCALENDAR');
+  return out.map(fold).join('\r\n')+'\r\n';
+}
+function saveIcs(name,evs){
+  if(!evs.length) return;
+  var a=h('a',{href:'data:text/calendar;charset=utf-8,'+encodeURIComponent(icsFile(evs)),download:name,style:'display:none'});
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ a.remove(); },2000);
+}
+function calBtns(p,key){
+  return h('span',{class:'cal'},h('span',{class:'label',text:'Add to calendar'}),
+    CAN_FILE?h('button',{class:'chip',type:'button','data-do':'ics','data-key':key,text:'Apple or Outlook'}):null,
+    h('a',{class:'chip',href:gcal(p),target:'_blank',rel:'noopener',text:'Google'}));
+}
+
+/* ---------- toast ---------- */
+var toastTimer=null, toastFn=null;
+function toast(msg,label,fn){
+  var t=$('#toast'); t.textContent=''; add(t,h('span',{text:msg}));
+  toastFn=label&&fn?fn:null;
+  if(toastFn) add(t,h('button',{type:'button',text:label}));
+  t.hidden=false; clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){ t.hidden=true; toastFn=null; },toastFn?6500:3200);
 }
 
 /* ---------- filters ---------- */
@@ -359,7 +530,17 @@ var MOODS=['swim','skate','sports','fit','arts','youth','early'];
 var VERBS={'Swim':'swim','Skate':'skate','Sports':'play','Fitness':'sweat','Arts & Hobbies':'make stuff','Youth Spaces':'hang out','Early Years':'play with my kid'};
 function renderMood(){
   $('.page').setAttribute('data-mood',S.cat);
-  $('#verb').textContent=VERBS[D.cats[S.cat]]||D.cats[S.cat].toLowerCase();
+  var p=$('#tagline'); p.textContent='';
+  if(S.view==='favs') add(p,['My ',h('mark',{text:'favourite'}),' places to just show up']);
+  else if(S.view==='plan') add(p,['Where I’m ',h('mark',{text:'showing up'}),' this week']);
+  else add(p,['Where can I just show up and ',h('mark',{text:VERBS[D.cats[S.cat]]||D.cats[S.cat].toLowerCase()}),'?']);
+}
+function renderTabs(){
+  var box=$('#tabs'); box.textContent='';
+  [['find','Find',0],['favs','Favourites',S.favP.length+S.favA.length],['plan','My plan',S.plan.length]].forEach(function(t){
+    add(box,h('button',{class:'tab',type:'button','data-view':t[0],'aria-pressed':S.view===t[0]?'true':'false'},
+      t[1],t[2]?h('span',{class:'count',text:t[2]}):null));
+  });
 }
 function renderOrigin(){
   $('#origin-label').textContent=S.origin.label;
@@ -378,13 +559,13 @@ function renderTypes(){
   if(all.length>shown.length||S.moreTypes&&all.length>8)
     box.appendChild(h('button',{class:'chip quiet',type:'button','data-more':1,text:S.moreTypes?'Fewer':'+'+(all.length-shown.length)+' more'}));
 }
-function renderDays(now){
-  var box=$('#days'); box.textContent='';
+function renderDays(now,box){
+  box=box||$('#days'); box.textContent='';
   var t0=dayNum(now.date), base=t0-dayNum(D.start), i;
   for(i=0;i<7;i++){
     box.appendChild(h('button',{class:'day',type:'button','data-day':i,'aria-pressed':i===S.day?'true':'false',disabled:base+i>lastDay||base+i<0,
       'aria-label':fmtDate(t0+i,{weekday:'long',month:'long',day:'numeric'})},
-      h('small',{text:i===0?'Today':fmtDate(t0+i,{weekday:'short'}).replace('.','')}),
+      h('small',{text:i===0?'Today':dow(t0+i)}),
       h('span',{text:dateOf(t0+i).getUTCDate()})));
   }
 }
@@ -446,7 +627,7 @@ function renderResults(now){
   // one shared clock range so every strip lines up
   var lo=360, hi=1320;
   within.forEach(function(g){ g.items.forEach(function(x){ lo=Math.min(lo,Math.floor(x.r[2]/60)*60); hi=Math.max(hi,Math.ceil(x.r[3]/60)*60); }); });
-  var ctx={lo:lo,hi:hi,now:isToday?now.mins:null};
+  var ctx={lo:lo,hi:hi,now:isToday?now.mins:null,iso:isoOf(dayNum(now.date)+S.day)};
   within.slice(0,S.limit).forEach(function(g){ box.appendChild(card(g,ctx)); });
   if(within.length>S.limit) box.appendChild(h('button',{class:'chip more',type:'button','data-act':'more',text:'Show '+Math.min(30,within.length-S.limit)+' more places'}));
 }
@@ -470,43 +651,193 @@ function emptyState(all,di,now){
   }
   return e;
 }
-function card(g,ctx){
-  var L=g.loc, range=ctx.hi-ctx.lo;
-  var pct=function(m){return ((m-ctx.lo)/range*100).toFixed(2)+'%';};
+function dayStrip(blocks,lo,hi,nowM){
+  var range=hi-lo, pct=function(m){return ((m-lo)/range*100).toFixed(2)+'%';};
   var strip=h('div',{class:'strip'}), ticks=h('div',{class:'ticks'}), t;
-  g.items.forEach(function(x){ strip.appendChild(h('i',{class:x.past?'past':null,style:'left:'+pct(x.r[2])+';width:'+((x.r[3]-x.r[2])/range*100).toFixed(2)+'%'})); });
-  if(ctx.now!=null&&ctx.now>ctx.lo&&ctx.now<ctx.hi) strip.appendChild(h('b',{style:'left:'+pct(ctx.now)}));
-  for(t=Math.ceil((ctx.lo+60)/180)*180;t<=ctx.hi-60;t+=180){
+  blocks.forEach(function(b){ strip.appendChild(h('i',{class:b[2]?'past':null,style:'left:'+pct(b[0])+';width:'+((b[1]-b[0])/range*100).toFixed(2)+'%'})); });
+  if(nowM!=null&&nowM>lo&&nowM<hi) strip.appendChild(h('b',{style:'left:'+pct(nowM)}));
+  for(t=Math.ceil((lo+60)/180)*180;t<=hi-60;t+=180){
     var hh=t/60%24; ticks.appendChild(h('span',{style:'left:'+pct(t),text:(hh%12||12)+(hh<12?'a':'p')}));
   }
+  return h('div',{class:'day-strip','aria-hidden':'true'},strip,ticks);
+}
+var EO_NOTE='Open drop-in hours for ages 0 to 6. The city does not list what runs when, like baby-only times, so ask the centre.';
+function card(g,ctx){
+  var L=g.loc, lk=locKey(L), favP=favPAt(lk)>=0;
+  // on the Favourites page a place lists every activity, so long days start folded
+  var cap=ctx.cap&&!S.expand[lk]&&g.items.length>ctx.cap+2?ctx.cap:0;
   var list=h('ul',{class:'sessions'});
-  g.items.forEach(function(x){
-    var r=x.r, tags=[];
+  g.items.forEach(function(x,i){
+    if(cap&&i>=cap) return;
+    var r=x.r, ev=evOf(ctx.iso,L,x.c,r), key=evKey(ev), planned=planAt(key)>=0, fav=favAAt(lk,x.c[0])>=0, open=S.open===key, tags=[];
+    SESS.set(key,ev);
     if(ctx.now!=null&&!x.past){
       if(r[2]<=ctx.now) tags.push(h('span',{class:'tag live',text:'On now, ends '+at(r[3])}));
       else if(r[2]-ctx.now<=90) tags.push(h('span',{class:'tag soon',text:'In '+(r[2]-ctx.now)+' min'}));
     }
-    tags.push(h('span',{class:'tag',text:x.c[4]||ageLabel(r[4],r[5])}));
+    tags.push(h('span',{class:'tag',text:ev.g}));
     if(x.c[3]) tags.push(h('span',{class:'tag soon',text:'Reserve ahead'}));
+    if(planned) tags.push(h('span',{class:'tag mine',text:'In my plan'}));
     list.appendChild(h('li',{class:x.past?'past':null},
       h('span',{class:'time',text:span(r[2],r[3])}),
-      h('span',{class:'what'},h('span',{class:'name',text:x.c[0]}),tags)));
+      h('span',{class:'what'},h('span',{class:'name'},x.c[0],fav?icon('heart',true):null),tags),
+      h('button',{class:'row-btn'+(planned?' on':''),type:'button','data-row':key,'aria-expanded':open?'true':'false',
+        'aria-label':'Options for '+x.c[0]+', '+span(r[2],r[3])+(planned?', in my plan':'')+(fav?', a favourite':'')},icon(planned?'check':'plus')),
+      open?h('div',{class:'tray'},
+        x.past?null:h('button',{class:'chip ico',type:'button','data-do':'plan','data-key':key,'aria-pressed':planned?'true':'false'},
+          icon(planned?'check':'plus'),planned?'In my plan':'Add to my plan'),
+        h('button',{class:'chip ico',type:'button','data-do':'fava','data-key':key,'aria-pressed':fav?'true':'false'},
+          icon('heart',fav),fav?'Favourite activity':'Favourite this activity'),
+        x.past?null:calBtns(ev,key)):null));
   });
   var meta=[L[4]]; if(L[6]===2) meta.push('Fully accessible'); else if(L[6]===1) meta.push('Partially accessible');
   // EarlyON centres carry two extra fields: the operator's website and short notes
   var eo=L.length>8, web=function(u){return typeof u==='string'&&/^https?:\/\//i.test(u);};
   if(eo&&Array.isArray(L[9])) meta=meta.concat(L[9]);
   return h('article',{class:'place'},
-    h('div',{class:'place-head'},h('h3',{text:L[1]}),g.dist!=null?h('span',{class:'dist',text:fmtKm(g.dist)}):null),
+    h('div',{class:'place-head'},h('h3',{text:L[1]}),
+      h('button',{class:'heart',type:'button','data-favp':lk,'aria-pressed':favP?'true':'false',
+        'aria-label':favP?'Remove '+L[1]+' from favourites':'Add '+L[1]+' to favourites'},icon('heart',favP)),
+      g.dist!=null?h('span',{class:'dist',text:fmtKm(g.dist)}):null),
     h('p',{class:'meta',text:meta.filter(Boolean).join(' · ')}),
-    h('div',{class:'day-strip','aria-hidden':'true'},strip,ticks),
-    list,
+    eo?h('p',{class:'note',text:EO_NOTE}):null,
+    g.items.length?[dayStrip(g.items.map(function(x){return [x.r[2],x.r[3],x.past];}),ctx.lo,ctx.hi,ctx.now),list]:h('p',{class:'hint',text:ctx.none||''}),
+    cap?h('button',{class:'link more',type:'button','data-do':'expand','data-key':lk,text:'Show all '+g.items.length+' here'}):null,
     h('div',{class:'links'},
       eo ? (web(D.earlyonPage)?h('a',{href:D.earlyonPage,target:'_blank',rel:'noopener',text:'City EarlyON page'}):null)
          : h('a',{href:'https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id='+encodeURIComponent(L[0]),target:'_blank',rel:'noopener',text:'City page for this centre'}),
       eo&&web(L[8])?h('a',{href:L[8],target:'_blank',rel:'noopener',text:'Centre website'}):null,
-      h('a',{href:'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(L[1]+', '+L[4]+', Toronto, ON'),target:'_blank',rel:'noopener',text:'Directions'}),
+      h('a',{href:mapsUrl({n:L[1],a:L[4]}),target:'_blank',rel:'noopener',text:'Directions'}),
       L[7]?h('span',{class:'phone',text:L[7]}):null));
+}
+
+/* ---------- favourites page ---------- */
+function emptyBox(big,text){
+  return h('div',{class:'empty'},h('p',{class:'big',text:big}),h('p',{text:text}),
+    h('div',{class:'row'},h('button',{class:'chip',type:'button','data-view':'find',text:'Find something'})));
+}
+function favActCard(f,i,now,t0,base){
+  var li=locByKey.get(f.k), L=li==null?null:D.locs[li];
+  var art=h('article',{class:'place'},
+    h('div',{class:'place-head'},h('h3',null,f.t,h('small',{text:f.n})),
+      h('button',{class:'heart',type:'button','data-do':'unfava','data-i':i,'aria-pressed':'true','aria-label':'Remove '+f.t+' at '+f.n+' from favourites'},icon('heart',true)),
+      L&&L[2]!=null?h('span',{class:'dist',text:fmtKm(km(S.origin.lat,S.origin.lng,L[2],L[3]))}):null));
+  if(!L){ add(art,h('p',{class:'hint',text:'This place is not in the current city schedule.'})); return art; }
+  var week=h('ul',{class:'week'}), any=false;
+  for(var d=0;d<7;d++){
+    var rows=(byDay.get(base+d)||[]).filter(function(r){ return r[0]===li&&D.courses[r[1]][0]===f.t&&!(d===0&&r[3]<=now.mins); });
+    if(!rows.length) continue;
+    rows.sort(function(a,b){return a[2]-b[2]||a[3]-b[3];});
+    var seen={}, slots=h('div',{class:'row'}), iso=isoOf(t0+d);
+    rows.forEach(function(r){
+      var ev=evOf(iso,L,D.courses[r[1]],r), key=evKey(ev), on=planAt(key)>=0;
+      if(seen[key]) return;
+      seen[key]=1; SESS.set(key,ev);
+      add(slots,h('button',{class:'chip ico slot',type:'button','data-do':'plan','data-key':key,'aria-pressed':on?'true':'false',
+        'aria-label':span(r[2],r[3])+(on?', in my plan':', add to my plan')},icon(on?'check':'plus'),span(r[2],r[3])));
+    });
+    any=true;
+    add(week,h('li',null,h('span',{class:'dow',text:d===0?'Today':dow(t0+d)+' '+dateOf(t0+d).getUTCDate()}),slots));
+  }
+  add(art,any?week:h('p',{class:'hint',text:'Nothing listed in the next 7 days.'}));
+  add(art,h('div',{class:'links'},h('a',{href:mapsUrl({n:L[1],a:L[4]}),target:'_blank',rel:'noopener',text:'Directions'}),
+    L[7]?h('span',{class:'phone',text:L[7]}):null));
+  return art;
+}
+function renderFavs(now){
+  var box=$('#favs'); box.textContent='';
+  var t0=dayNum(now.date), base=t0-dayNum(D.start);
+  if(!S.favA.length&&!S.favP.length){
+    add(box,emptyBox('No favourites yet.','Tap the heart on a place to keep it here. To keep one activity at one place, tap the round + beside a time and choose “Favourite this activity”.'));
+    return;
+  }
+  if(S.favA.length){
+    add(box,h('h2',{class:'sec',text:'My activities'}));
+    add(box,h('p',{class:'hint',text:'The next 7 days. Tap a time to put it in your plan.'}));
+    S.favA.forEach(function(f,i){ add(box,favActCard(f,i,now,t0,base)); });
+  }
+  if(S.favP.length){
+    add(box,h('h2',{class:'sec',text:'My places'}));
+    add(box,h('p',{class:'hint',text:'Everything on at your places, one day at a time.'}));
+    var days=h('div',{class:'days'}); renderDays(now,days); add(box,days);
+    var di=base+S.day, isToday=S.day===0, groups=new Map(), missing=[];
+    S.favP.forEach(function(f){
+      var li=locByKey.get(f.k);
+      if(li==null){ missing.push(f); return; }
+      var L=D.locs[li];
+      groups.set(li,{loc:L,dist:L[2]==null?null:km(S.origin.lat,S.origin.lng,L[2],L[3]),items:[]});
+    });
+    (byDay.get(di)||[]).forEach(function(r){
+      var g=groups.get(r[0]);
+      if(!g||(isToday&&r[3]<=now.mins)) return;
+      g.items.push({r:r,c:D.courses[r[1]],past:false});
+    });
+    var lo=360, hi=1320, all=Array.from(groups.values());
+    all.forEach(function(g){
+      g.items.sort(function(a,b){return a.r[2]-b.r[2]||a.r[3]-b.r[3];});
+      g.items.forEach(function(x){ lo=Math.min(lo,Math.floor(x.r[2]/60)*60); hi=Math.max(hi,Math.ceil(x.r[3]/60)*60); });
+    });
+    all.sort(function(a,b){ return (a.dist==null?1e9:a.dist)-(b.dist==null?1e9:b.dist); });
+    var ctx={lo:lo,hi:hi,now:isToday?now.mins:null,iso:isoOf(t0+S.day),cap:8,
+      none:di>lastDay||di<0?'The schedule in this app does not reach that day.':isToday?'Nothing more listed here today.':'Nothing listed here '+dayPhrase(now)+'.'};
+    all.forEach(function(g){ add(box,card(g,ctx)); });
+    missing.forEach(function(f){
+      add(box,h('article',{class:'place'},
+        h('div',{class:'place-head'},h('h3',{text:f.n}),
+          h('button',{class:'heart',type:'button','data-favp':f.k,'aria-pressed':'true','aria-label':'Remove '+f.n+' from favourites'},icon('heart',true))),
+        h('p',{class:'hint',text:'This place is not in the current city schedule.'})));
+    });
+  }
+}
+
+/* ---------- plan page ---------- */
+function byWhen(a,b){ return a.d<b.d?-1:a.d>b.d?1:a.s-b.s||a.e-b.e; }
+function renderPlan(now){
+  var box=$('#plan'); box.textContent='';
+  var t0=dayNum(now.date), start=dayNum(D.start);
+  if(!S.plan.length){
+    add(box,emptyBox('Nothing lined up yet.','Tap the round + beside any time and choose “Add to my plan”. Your picks gather here day by day, ready to send to your calendar.'));
+    return;
+  }
+  var plan=S.plan.slice().sort(byWhen), days=[], cur=null;
+  add(box,h('div',{class:'plan-top'},
+    h('p',{class:'big',text:plan.length+(plan.length===1?' thing':' things')+' lined up'}),
+    CAN_FILE?h('button',{class:'chip ico',type:'button','data-do':'icsall'},icon('cal'),'Add all to calendar'):null,
+    h('button',{class:'link',type:'button','data-do':'clearplan',text:'Clear plan'})));
+  add(box,h('p',{class:'hint',text:CAN_FILE
+    ?'“Add all to calendar” makes one file that Apple Calendar and Outlook can open. For Google Calendar, use the Google link under each one.'
+    :'Use the Google link under each one to add it to Google Calendar. Calendar files for Apple Calendar and Outlook are on the public site.'}));
+  plan.forEach(function(p){ if(!cur||cur.d!==p.d){ cur={d:p.d,items:[]}; days.push(cur); } cur.items.push(p); });
+  days.forEach(function(day){
+    var n=dayNum(day.d), isToday=n===t0, off=n-start, rows=off>=0&&off<=lastDay?(byDay.get(off)||[]):null;
+    var lo=1440, hi=0, list=h('ul',{class:'sessions'});
+    day.items.forEach(function(p){ lo=Math.min(lo,Math.floor(p.s/60)*60); hi=Math.max(hi,Math.ceil(p.e/60)*60); });
+    lo=Math.max(0,lo-60); hi+=60;
+    day.items.forEach(function(p){
+      var key=evKey(p), ended=isToday&&p.e<=now.mins, tags=[], li=locByKey.get(p.k);
+      SESS.set(key,p);
+      if(isToday&&!ended){
+        if(p.s<=now.mins) tags.push(h('span',{class:'tag live',text:'On now, ends '+at(p.e)}));
+        else if(p.s-now.mins<=90) tags.push(h('span',{class:'tag soon',text:'In '+(p.s-now.mins)+' min'}));
+      }
+      if(p.g) tags.push(h('span',{class:'tag',text:p.g}));
+      if(day.items.some(function(q){ return q!==p&&q.s<p.e&&p.s<q.e; })) tags.push(h('span',{class:'tag soon',text:'Overlaps'}));
+      if(rows&&!rows.some(function(r){ return r[0]===li&&r[2]===p.s&&r[3]===p.e&&D.courses[r[1]][0]===p.t; }))
+        tags.push(h('span',{class:'tag soon',text:'No longer in the city schedule'}));
+      add(list,h('li',{class:ended?'past':null},
+        h('span',{class:'time',text:span(p.s,p.e)}),
+        h('span',{class:'what'},h('span',{class:'name',text:p.t}),h('span',{class:'at',text:p.n}),tags),
+        h('button',{class:'row-btn',type:'button','data-do':'unplan','data-key':key,'aria-label':'Remove '+p.t+' at '+p.n+' from my plan'},icon('x')),
+        h('div',{class:'mini'},
+          CAN_FILE?h('button',{class:'link',type:'button','data-do':'ics','data-key':key,text:'Apple or Outlook calendar'}):null,
+          h('a',{href:gcal(p),target:'_blank',rel:'noopener',text:'Google Calendar'}),
+          h('a',{href:mapsUrl(p),target:'_blank',rel:'noopener',text:'Directions'}))));
+    });
+    add(box,h('article',{class:'place'},
+      h('div',{class:'place-head'},h('h3',null,isToday?'Today':n===t0+1?'Tomorrow':fmtDate(n,{weekday:'long'}),h('small',{text:fmtDate(n,{month:'long',day:'numeric'})}))),
+      dayStrip(day.items.map(function(p){return [p.s,p.e,isToday&&p.e<=now.mins];}),lo,hi,isToday?now.mins:null),
+      list));
+  });
 }
 function renderNotice(now){
   var box=$('#notice'); box.textContent=''; box.hidden=true;
@@ -525,15 +856,61 @@ function renderFoot(){
   var f=$('#foot'); f.textContent='';
   var d=function(iso){return fmtDate(dayNum(iso),{month:'short',day:'numeric'});};
   add(f,h('p',{text:'Schedules come from the City of Toronto open data feed published '+d(D.sourceUpdated||D.start)+' and run to '+d(D.end)+'. The city updates the feed weekly, so a same-day closure or cancellation will not appear here. Check the centre’s city page before you head out.'}));
-  if(D.earlyonUpdated) add(f,h('p',{text:'EarlyON times are each centre’s regular weekly drop-in hours from the city’s EarlyON list, updated '+d(D.earlyonUpdated)+'. EarlyON is free, for children from birth to 6 with a parent or caregiver. The list does not say which program runs in each time slot, and centres can close for holidays and school breaks, so check with the centre first.'}));
+  if(D.earlyonUpdated) add(f,h('p',{text:'EarlyON times are each centre’s regular weekly drop-in hours from the city’s EarlyON list, updated '+d(D.earlyonUpdated)+'. Every EarlyON centre is free and for children from birth to 6 with a parent or caregiver. The city does not publish what runs in each time slot, such as baby-only or toddler times, and centres can close for holidays and school breaks, so check with the centre first.'}));
+  add(f,h('p',{text:'Favourites and your plan are saved in this browser only. They will not show up on another phone or computer.'}));
   add(f,h('p',{text:'Distances are straight-line. Postal code searches use the approximate middle of the area.'}));
   add(f,h('p',{text:'An unofficial personal tool, not a City of Toronto service. Contains information licensed under the Open Government Licence – Toronto.'}));
 }
 function render(){
   if(!D) return;
-  var now=torontoNow();
-  renderMood(); renderOrigin(); renderCats(); renderTypes(); renderDays(now); renderOpts();
-  renderNotice(now); renderResults(now);
+  var now=torontoNow(), v=S.view;
+  SESS=new Map();
+  renderMood(); renderTabs(); renderOrigin();
+  $('.origin').hidden=v==='plan';
+  $('.filters').hidden=$('#summary').hidden=$('#results').hidden=v!=='find';
+  $('#favs').hidden=v!=='favs'; $('#plan').hidden=v!=='plan';
+  if(v==='find'){ renderCats(); renderTypes(); renderDays(now); renderOpts(); renderNotice(now); renderResults(now); }
+  else{ $('#notice').hidden=true; if(v==='favs') renderFavs(now); else renderPlan(now); }
+}
+
+/* ---------- favourite and plan actions ---------- */
+function setView(v){
+  S.view=v; S.open=null; render();
+  var t=$('#tabs'); if(t.getBoundingClientRect().top<0) t.scrollIntoView({block:'start'});
+}
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)||'drop-in'; }
+function undo(key,prev){ return function(){ S[key]=prev; saveState(); render(); }; }
+function goTo(v){ return function(){ setView(v); }; }
+function toggleFavP(k){
+  var i=favPAt(k), li=locByKey.get(k), prev=S.favP.slice();
+  if(i>=0){ var n=S.favP.splice(i,1)[0].n; toast(n+' removed from Favourites','Undo',undo('favP',prev)); }
+  else if(li!=null){ S.favP.push({k:k,n:D.locs[li][1]}); toast(D.locs[li][1]+' added to Favourites',S.view==='favs'?null:'View',goTo('favs')); }
+  else return;
+  saveState(); render();
+}
+function act(what,t){
+  var key=t.getAttribute('data-key'), ev=key?SESS.get(key):null, i, prev;
+  if(what==='plan'&&ev){
+    i=planAt(key); prev=S.plan.slice();
+    if(i>=0){ S.plan.splice(i,1); toast('Removed from your plan','Undo',undo('plan',prev)); }
+    else{ S.plan.push(ev); toast('Added to your plan','View',goTo('plan')); }
+  }else if(what==='unplan'){
+    i=planAt(key); if(i<0) return;
+    prev=S.plan.slice(); S.plan.splice(i,1); toast('Removed from your plan','Undo',undo('plan',prev));
+  }else if(what==='fava'&&ev){
+    i=favAAt(ev.k,ev.t); prev=S.favA.slice();
+    if(i>=0){ S.favA.splice(i,1); toast(ev.t+' here removed from Favourites','Undo',undo('favA',prev)); }
+    else{ S.favA.push({k:ev.k,n:ev.n,t:ev.t}); toast(ev.t+' at '+ev.n+' added to Favourites','View',goTo('favs')); }
+  }else if(what==='unfava'){
+    i=+t.getAttribute('data-i'); if(!S.favA[i]) return;
+    prev=S.favA.slice(); toast(S.favA.splice(i,1)[0].t+' removed from Favourites','Undo',undo('favA',prev));
+  }else if(what==='clearplan'){
+    prev=S.plan.slice(); S.plan=[]; toast('Plan cleared','Undo',undo('plan',prev));
+  }else if(what==='ics'&&ev){ saveIcs(slug(ev.t)+'-'+ev.d+'.ics',[ev]); return; }
+  else if(what==='icsall'){ saveIcs('toronto-drop-ins.ics',S.plan.slice().sort(byWhen)); return; }
+  else if(what==='expand'){ S.expand[key]=true; render(); return; }
+  else return;
+  saveState(); render();
 }
 
 /* ---------- starting point ---------- */
@@ -707,12 +1084,31 @@ on('#results','click',function(e){
   if(a==='radius'){ S.radius=+t.getAttribute('data-v'); changed(); }
   else if(a==='more'){ S.limit+=30; render(); }
 });
+// tabs, hearts, the round + beside a time, and everything inside its tray
+document.addEventListener('click',function(e){
+  var t, k, b;
+  if(!D) return;
+  if(e.target.closest('#toast')){
+    if(e.target.closest('button')&&toastFn){ t=toastFn; toastFn=null; $('#toast').hidden=true; t(); }
+    return;
+  }
+  if((t=hit(e,'data-view'))){ setView(t.getAttribute('data-view')); return; }
+  if((t=hit(e,'data-favp'))){ toggleFavP(t.getAttribute('data-favp')); return; }
+  if((t=hit(e,'data-row'))){
+    k=t.getAttribute('data-row'); S.open=S.open===k?null:k; render();
+    b=Array.prototype.filter.call(document.querySelectorAll('[data-row]'),function(x){ return x.getAttribute('data-row')===k&&x.offsetParent; })[0];
+    if(b) try{ b.focus({preventScroll:true}); }catch(err){}
+    return;
+  }
+  if((t=hit(e,'data-do'))){ act(t.getAttribute('data-do'),t); return; }
+  if((t=hit(e,'data-day'))&&t.closest('#favs')){ S.day=+t.getAttribute('data-day'); S.showPast=false; changed(); }
+});
 
 /* ---------- start ---------- */
 loadState();
 fetch('data/schedule.json').then(function(r){ if(!r.ok) throw new Error('schedule '+r.status); return r.json(); }).then(function(j){
   D=j; index(); validate(); renderFoot(); render();
-  setInterval(function(){ if(!document.hidden&&S.day===0) render(); },60000);
+  setInterval(function(){ if(!document.hidden&&(S.day===0||S.view!=='find')) render(); },60000);
   geoAllowed().then(function(ok){
     $('#geo-btn').hidden=!ok;
     if(ok&&S.origin.live&&navigator.permissions&&navigator.permissions.query)

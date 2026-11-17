@@ -17,7 +17,19 @@ An unofficial personal project. It is not a City of Toronto service.
   183 MB of address points).
 - `build_site.py` wraps the page into a standalone website in `site/`.
 
-Your starting point and filters are saved only in your own browser.
+Three pages share the one screen:
+
+- **Find** lists what is on near you for a chosen activity and day.
+- **Favourites** keeps places (tap the heart on a place) and single activities
+  at a place (tap the round + beside a time). Places show everything on that
+  day; activities show the next seven days.
+- **My plan** collects the sessions you pick, day by day, and flags ones that
+  overlap or have dropped out of the city schedule. Any session, or the whole
+  plan, can go to a calendar: a calendar file for Apple Calendar and Outlook,
+  or a link for Google Calendar.
+
+Your starting point, filters, favourites and plan are saved only in your own
+browser, so they do not follow you to another phone or computer.
 
 ## Run it locally
 
@@ -34,7 +46,9 @@ EarlyON Child and Family Centres appear under Early Years. They are free, for
 children from birth to six with a parent or caregiver. The city publishes each
 centre's regular weekly drop-in hours, not dated sessions, so the app repeats
 those hours each week and skips Ontario public holidays. It cannot tell which
-program runs in a given time slot or when a centre closes for a school break.
+program runs in a given time slot (the city's own page says to contact centres
+for that, so baby-only or toddler times are not shown) or when a centre closes
+for a school break.
 
 Contains information licensed under the
 [Open Government Licence – Toronto](https://open.toronto.ca/open-data-license/),
