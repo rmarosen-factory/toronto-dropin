@@ -1,0 +1,720 @@
+<title>Toronto Drop-In Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: a pool-party flyer. A raccoon lifeguard bobs in the masthead and
+   swaps hats with the activity; each activity repaints the page in its own
+   colour; chips and cards are chunky stickers in one narrow column. */
+:root{
+  --bg:#E2F5F4; --dot:#CBEAE9; --surface:#FFFFFF; --sunken:#D9EEF0; --ink:#16213E; --ink-2:#4B5877; --edge:#16213E; --on-act:#16213E;
+  --swim:#3CCBDD; --skate:#9CC2FF; --sports:#FF9F45; --fit:#FF7493; --arts:#BB96FF; --youth:#62D694; --early:#FFD447;
+  --live:#0B6B41; --live-soft:#CDF2DD; --soon:#7E4500; --soon-soft:#FFE8BD;
+  --fur:#A3ABBB; --fur-dark:#3A4157; --fur-light:#F4F6FA;
+  --act:var(--swim);
+  --display:"Grandstander","Comic Sans MS","Trebuchet MS",sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1634; --dot:#182149; --surface:#1B2450; --sunken:#27336A; --ink:#F3F1FF; --ink-2:#AFB7DB; --edge:#050919;
+    --live:#7BE3AD; --live-soft:#113A29; --soon:#FFC56B; --soon-soft:#3F2F0E;
+    --fur:#A9B1C4; --fur-dark:#2B3149; --fur-light:#F4F6FA; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1634; --dot:#182149; --surface:#1B2450; --sunken:#27336A; --ink:#F3F1FF; --ink-2:#AFB7DB; --edge:#050919;
+  --live:#7BE3AD; --live-soft:#113A29; --soon:#FFC56B; --soon-soft:#3F2F0E;
+  --fur:#A9B1C4; --fur-dark:#2B3149; --fur-light:#F4F6FA; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg) radial-gradient(var(--dot) 1.6px,transparent 2.2px) 0 0/22px 22px;color:var(--ink);font-family:var(--body);font-size:15.5px;font-weight:500;line-height:1.45}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoration-color:var(--act);text-decoration-thickness:3px;text-underline-offset:3px}
+
+.page{max-width:720px;margin:0 auto;padding-block:18px 48px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:20px}
+.page[data-mood="1"]{--act:var(--skate)}
+.page[data-mood="2"]{--act:var(--sports)}
+.page[data-mood="3"]{--act:var(--fit)}
+.page[data-mood="4"]{--act:var(--arts)}
+.page[data-mood="5"]{--act:var(--youth)}
+.page[data-mood="6"]{--act:var(--early)}
+
+/* masthead */
+.mast{display:flex;flex-direction:column}
+.mast-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:-9px}
+.mast-text{display:flex;flex-direction:column;gap:7px;min-width:0;padding-bottom:20px}
+.mast h1{margin:0;font-family:var(--display);font-weight:800;font-size:34px;line-height:1.04;letter-spacing:-.01em;text-wrap:balance}
+.mast h1 span{white-space:nowrap;text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--act);text-decoration-thickness:3px;text-underline-offset:5px}
+.tag-line{margin:0;font-weight:700;font-size:16px;color:var(--ink-2)}
+.tag-line mark{display:inline-block;background:var(--act);color:var(--on-act);font-family:var(--display);font-weight:700;padding:1px 8px 0;border-radius:8px;transform:rotate(-2deg)}
+.mascot{flex:none;width:104px;height:auto;transform-origin:50% 90%;animation:bob 3.4s ease-in-out infinite}
+.mascot .acc{display:none}
+.page[data-mood="0"] .acc-0,.page[data-mood="1"] .acc-1,.page[data-mood="2"] .acc-2,.page[data-mood="3"] .acc-3,
+.page[data-mood="4"] .acc-4,.page[data-mood="5"] .acc-5,.page[data-mood="6"] .acc-6{display:block}
+@keyframes bob{0%,100%{transform:translateY(1px) rotate(-3deg)}50%{transform:translateY(-4px) rotate(3deg)}}
+.waves{position:relative;z-index:1;height:16px;border-radius:0 0 8px 8px;
+  background:radial-gradient(circle at 12px -1px,transparent 12px,var(--act) 12.5px) 0 0/24px 16px repeat-x}
+
+/* starting point */
+.origin{display:flex;flex-direction:column;gap:10px}
+.origin-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;
+  background:var(--surface);border:2px solid var(--edge);border-radius:18px;padding:10px 14px;box-shadow:4px 4px 0 var(--act)}
+.origin-btn .where{display:flex;flex-direction:column;min-width:0}
+.origin-btn .where strong{font-family:var(--display);font-size:21px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+.origin-btn .change{flex:none;background:var(--act);color:var(--on-act);border:2px solid var(--edge);border-radius:999px;padding:3px 12px;font-weight:800;font-size:14px;transform:rotate(2deg)}
+.loc-panel{background:var(--surface);border:2px solid var(--edge);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.loc-panel input[type="text"]{width:100%;padding:10px 14px;border:2px solid var(--edge);border-radius:999px;background:var(--bg);font-size:16px;font-weight:700}
+.sugs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.sugs button{display:flex;flex-direction:column;width:100%;text-align:left;background:none;border:none;border-radius:12px;padding:7px 12px}
+.sugs button:hover{background:var(--act);color:var(--on-act)}
+.sugs .s-main{font-weight:800}
+.sugs .s-sub,.hint{color:var(--ink-2);font-size:13.5px}
+.sugs button:hover .s-sub{color:inherit}
+.hint{margin:0}
+.recents{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+
+/* filters */
+.filters{display:flex;flex-direction:column;gap:14px}
+.group{display:flex;flex-direction:column;gap:6px;min-width:0}
+.label{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.row{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--surface);border:2px solid var(--edge);border-radius:999px;padding:5px 13px;font-size:14.5px;font-weight:700;line-height:1.25;transition:transform .12s ease}
+.chip:hover{transform:rotate(-2deg) scale(1.04)}
+.chip:active{transform:scale(.96)}
+.chip[aria-pressed="true"]{background:var(--act);color:var(--on-act);box-shadow:2px 2px 0 var(--edge);transform:rotate(-1.5deg)}
+.chip.quiet{background:none;border-style:dashed;color:var(--ink-2)}
+.cats .chip{font-family:var(--display);font-size:17px;padding:6px 14px 5px;display:inline-flex;align-items:center;gap:7px}
+.cats .chip::before{content:"";flex:none;width:11px;height:11px;border-radius:50%;background:var(--c);border:2px solid var(--edge)}
+.cats .chip[aria-pressed="true"]{background:var(--c)}
+.cats .chip[aria-pressed="true"]::before{background:var(--surface)}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.day{background:var(--surface);border:2px solid var(--edge);border-radius:12px;padding:0 0 5px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;overflow:hidden;transition:transform .12s ease}
+.day small{align-self:stretch;background:var(--sunken);border-bottom:2px solid var(--edge);padding:3px 0 2px;font-size:11px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;text-align:center}
+.day span{font-family:var(--display);font-size:21px;font-weight:700;line-height:1.1}
+.day[aria-pressed="true"]{background:var(--act);color:var(--on-act);box-shadow:2px 2px 0 var(--edge);transform:rotate(-2.5deg)}
+.day[aria-pressed="true"] small{background:var(--edge);color:var(--act)}
+.day:disabled{opacity:.4;cursor:default}
+.opts{display:flex;flex-wrap:wrap;gap:14px 22px}
+.age{width:82px;padding:5px 12px;border:2px solid var(--edge);border-radius:999px;background:var(--surface);font-size:14.5px;font-weight:700}
+
+/* results */
+.notice{background:var(--early);color:var(--on-act);border:2px solid var(--edge);border-radius:14px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between;font-weight:700;transform:rotate(-.5deg);box-shadow:3px 3px 0 var(--edge)}
+.notice button,.link{background:none;border:none;padding:0;color:inherit;font-weight:800;text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.summary{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;padding-top:2px}
+.summary p{margin:0;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.25}
+.summary .link{font-size:14px;text-decoration-color:var(--act);text-decoration-thickness:3px}
+.results{display:flex;flex-direction:column;gap:18px}
+.place{background:var(--surface);border:2px solid var(--edge);border-radius:20px;padding:15px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:5px 5px 0 var(--act)}
+.place-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.place-head h3{margin:0;font-family:var(--display);font-size:21px;font-weight:700;line-height:1.2;min-width:0;overflow-wrap:anywhere;text-wrap:balance}
+.dist{flex:none;background:var(--act);color:var(--on-act);border:2px solid var(--edge);border-radius:999px;padding:2px 10px 1px;font-family:var(--display);font-size:15px;font-weight:700;transform:rotate(3deg)}
+.meta{margin:-5px 0 0;color:var(--ink-2);font-size:14px}
+.day-strip{display:flex;flex-direction:column;gap:3px}
+.strip{position:relative;height:14px;background:var(--sunken);border:2px solid var(--edge);border-radius:999px;overflow:hidden}
+.strip i{position:absolute;top:0;bottom:0;background:var(--act);min-width:3px}
+.strip i.past{opacity:.35}
+.strip b{position:absolute;top:0;bottom:0;width:3px;margin-left:-1px;background:var(--ink)}
+.ticks{position:relative;height:14px;font-size:11px;font-weight:700;color:var(--ink-2)}
+.ticks span{position:absolute;top:0;transform:translateX(-50%)}
+.sessions{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.sessions li{display:grid;grid-template-columns:9.8em minmax(0,1fr);gap:2px 10px;padding:8px 0;border-top:2px dashed var(--sunken);align-items:baseline}
+.sessions li.past{opacity:.5}
+.time{font-family:var(--display);font-size:16px;font-weight:700;white-space:nowrap}
+.what{min-width:0;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.what .name{font-weight:700;overflow-wrap:anywhere}
+.tag{font-size:12px;font-weight:800;border-radius:999px;padding:1px 9px;background:var(--sunken);color:var(--ink-2);white-space:nowrap}
+.tag.live{background:var(--live-soft);color:var(--live)}
+.tag.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:5px;animation:blink 1.4s ease-in-out infinite}
+.tag.soon{background:var(--soon-soft);color:var(--soon)}
+@keyframes blink{50%{opacity:.25}}
+.links{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14.5px;border-top:2px dashed var(--sunken);padding-top:10px}
+.links .phone{color:var(--ink-2);user-select:all;font-weight:700}
+.empty{background:var(--surface);border:2px dashed var(--edge);border-radius:20px;padding:18px 16px;display:flex;flex-direction:column;gap:10px}
+.empty p{margin:0}
+.empty .big{font-family:var(--display);font-size:20px;font-weight:700;line-height:1.25}
+.more{align-self:center}
+.foot{color:var(--ink-2);font-size:13px;max-width:65ch;display:flex;flex-direction:column;gap:6px}
+.foot p{margin:0}
+@media (prefers-reduced-motion:reduce){
+  .mascot,.tag.live::before{animation:none}
+  .chip,.day{transition:none}
+}
+@media (max-width:520px){
+  .page{gap:15px;padding-block:12px 40px}
+  .filters{gap:11px}
+  .mast h1{font-size:27px}
+  .tag-line{font-size:14.5px}
+  .mascot{width:84px}
+  .origin-btn{padding:8px 12px}
+  .cats .chip{font-size:15.5px;padding:5px 11px 4px}
+  .chip{font-size:13.5px;padding:4px 11px}
+  .day small{font-size:10px;letter-spacing:0}
+  .day span{font-size:19px}
+  .opts{gap:11px 18px}
+  .sessions li{grid-template-columns:9.2em minmax(0,1fr)}
+  .time{font-size:14.5px}
+}
+</style>
+
+<div class="page">
+  <header class="mast">
+    <div class="mast-row">
+      <div class="mast-text">
+        <h1>Toronto <span>Drop-In</span> Finder</h1>
+        <p class="tag-line">Where can I just show up and <mark id="verb">swim</mark>?</p>
+      </div>
+      <svg class="mascot" viewBox="0 -6 120 118" aria-hidden="true">
+        <g stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
+          <circle cx="28" cy="36" r="14" fill="var(--fur-dark)"/>
+          <circle cx="92" cy="36" r="14" fill="var(--fur-dark)"/>
+          <ellipse cx="60" cy="68" rx="46" ry="38" fill="var(--fur)"/>
+        </g>
+        <ellipse cx="41" cy="64" rx="18" ry="13" transform="rotate(-16 41 64)" fill="var(--fur-dark)"/>
+        <ellipse cx="79" cy="64" rx="18" ry="13" transform="rotate(16 79 64)" fill="var(--fur-dark)"/>
+        <ellipse cx="60" cy="84" rx="19" ry="14" fill="var(--fur-light)"/>
+        <circle cx="43" cy="64" r="7" fill="var(--fur-light)"/>
+        <circle cx="77" cy="64" r="7" fill="var(--fur-light)"/>
+        <circle cx="44.5" cy="65" r="3.6" fill="var(--edge)"/>
+        <circle cx="75.5" cy="65" r="3.6" fill="var(--edge)"/>
+        <ellipse cx="60" cy="77" rx="6.5" ry="4.8" fill="var(--edge)"/>
+        <path d="M51 86 Q60 94 69 86" fill="none" stroke="var(--edge)" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="24" cy="84" r="5.5" fill="var(--fit)" opacity=".55"/>
+        <circle cx="96" cy="84" r="5.5" fill="var(--fit)" opacity=".55"/>
+        <g class="acc acc-0" stroke="var(--edge)" stroke-width="3" stroke-linecap="round">
+          <path d="M15 52 Q60 30 105 52" fill="none" stroke-width="5"/>
+          <circle cx="45" cy="42" r="10" fill="var(--swim)"/>
+          <circle cx="75" cy="42" r="10" fill="var(--swim)"/>
+          <path d="M55 42 H65" fill="none"/>
+        </g>
+        <g class="acc acc-1" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
+          <path d="M24 44 Q26 8 60 8 Q94 8 96 44 Z" fill="var(--skate)"/>
+          <rect x="19" y="38" width="82" height="13" rx="6.5" fill="var(--fur-light)"/>
+          <circle cx="60" cy="8" r="7" fill="var(--fur-light)"/>
+        </g>
+        <g class="acc acc-2" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
+          <path d="M17 50 Q60 28 103 50 L104 40 Q60 17 16 40 Z" fill="var(--sports)"/>
+        </g>
+        <g class="acc acc-3" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
+          <path d="M103 44 L116 36 L113 48 Z" fill="var(--fit)"/>
+          <path d="M103 46 L115 57 L106 57 Z" fill="var(--fit)"/>
+          <path d="M17 50 Q60 28 103 50 L104 40 Q60 17 16 40 Z" fill="var(--fit)"/>
+        </g>
+        <g class="acc acc-4" stroke="var(--edge)" stroke-width="3" stroke-linecap="round">
+          <ellipse cx="54" cy="31" rx="38" ry="15" transform="rotate(-10 54 31)" fill="var(--arts)"/>
+          <path d="M58 16 Q60 8 66 6" fill="none"/>
+        </g>
+        <g class="acc acc-5" stroke="var(--edge)" stroke-width="3" stroke-linecap="round">
+          <path d="M14 62 Q12 16 60 16 Q108 16 106 62" fill="none" stroke-width="6"/>
+          <rect x="5" y="54" width="16" height="26" rx="7" fill="var(--youth)"/>
+          <rect x="99" y="54" width="16" height="26" rx="7" fill="var(--youth)"/>
+        </g>
+        <g class="acc acc-6" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M30 42 Q32 12 60 12 Q88 12 90 42 Z" fill="var(--early)"/>
+          <path d="M60 12 V4" fill="none"/>
+          <ellipse cx="47" cy="3" rx="12" ry="4" fill="var(--fit)"/>
+          <ellipse cx="73" cy="3" rx="12" ry="4" fill="var(--swim)"/>
+          <circle cx="60" cy="3" r="3" fill="var(--edge)"/>
+        </g>
+      </svg>
+    </div>
+    <div class="waves" aria-hidden="true"></div>
+  </header>
+
+  <section class="origin" aria-label="Starting point">
+    <button class="origin-btn" id="origin-btn" type="button" aria-expanded="false" aria-controls="loc-panel">
+      <span class="where"><span class="label">Starting from</span><strong id="origin-label">City Hall</strong></span>
+      <span class="change" id="origin-change">Change</span>
+    </button>
+    <div class="loc-panel" id="loc-panel" hidden>
+      <label class="label" for="loc-input">Address, postal code, neighbourhood or centre</label>
+      <input type="text" id="loc-input" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="e.g. 500 Danforth Ave, M4K, Riverdale">
+      <ul class="sugs" id="sugs"></ul>
+      <p class="hint" id="loc-hint" hidden></p>
+      <button class="chip" id="geo-btn" type="button" hidden>Use my current location</button>
+      <div class="recents" id="recents" hidden></div>
+    </div>
+  </section>
+
+  <section class="filters" aria-label="Filters">
+    <div class="group"><span class="label">Activity</span><div class="row cats" id="cats"></div></div>
+    <div class="group"><span class="label">Type</span><div class="row" id="types"></div></div>
+    <div class="group"><span class="label">Day</span><div class="days" id="days"></div></div>
+    <div class="opts">
+      <div class="group"><span class="label">Within</span><div class="row" id="radius"></div></div>
+      <div class="group"><span class="label">Order</span><div class="row" id="sort"></div></div>
+      <div class="group"><label class="label" for="age">Age of who's going</label><input class="age" id="age" type="number" inputmode="numeric" min="0" max="110" placeholder="Any"></div>
+    </div>
+  </section>
+
+  <div class="notice" id="notice" hidden></div>
+  <div class="summary" id="summary"><p>Loading the schedule…</p></div>
+  <section class="results" id="results" aria-live="polite"></section>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+var LS_KEY='tdf.v1';
+var CITY_HALL={label:'City Hall',lat:43.6534,lng:-79.3841,isDefault:true};
+var RADII=[2,5,10,0];
+var D=null, byDay=new Map(), catTypes=[], lastDay=0;
+var P=null, placesPromise=null, curSugs=[];
+var S={cat:0,types:[],day:0,radius:5,age:null,sort:'near',showPast:false,moreTypes:false,limit:30,origin:CITY_HALL,recents:[]};
+
+function $(s){return document.querySelector(s);}
+function h(tag,props){
+  var e=document.createElement(tag),k,v,i;
+  if(props) for(k in props){
+    v=props[k]; if(v==null||v===false) continue;
+    if(k==='class') e.className=v;
+    else if(k==='text') e.textContent=v;
+    else if(k==='style') e.style.cssText=v;
+    else if(k==='disabled') e.disabled=true;
+    else e.setAttribute(k,v===true?'':String(v));
+  }
+  for(i=2;i<arguments.length;i++) add(e,arguments[i]);
+  return e;
+}
+function add(e,kid){
+  if(kid==null||kid===false) return;
+  if(Array.isArray(kid)){kid.forEach(function(x){add(e,x);});return;}
+  e.appendChild(kid.nodeType?kid:document.createTextNode(String(kid)));
+}
+
+/* ---------- state ---------- */
+function loadState(){
+  try{
+    var j=JSON.parse(localStorage.getItem(LS_KEY)||'null');
+    if(j&&typeof j==='object') ['cat','types','radius','age','sort','origin','recents'].forEach(function(k){ if(k in j) S[k]=j[k]; });
+  }catch(e){}
+}
+function saveState(){
+  try{ localStorage.setItem(LS_KEY,JSON.stringify({cat:S.cat,types:S.types,radius:S.radius,age:S.age,sort:S.sort,origin:S.origin,recents:S.recents})); }catch(e){}
+}
+function validPoint(o){ return o&&typeof o.label==='string'&&isFinite(o.lat)&&isFinite(o.lng); }
+function validate(){
+  if(!(S.cat>=0&&S.cat<D.cats.length)) S.cat=0;
+  if(!Array.isArray(S.types)) S.types=[];
+  S.types=S.types.filter(function(t){return catTypes[S.cat].indexOf(t)>=0;});
+  if(RADII.indexOf(S.radius)<0) S.radius=5;
+  if(S.sort!=='near'&&S.sort!=='soon') S.sort='near';
+  if(!(typeof S.age==='number'&&S.age>=0&&S.age<=110)) S.age=null;
+  if(!validPoint(S.origin)) S.origin=CITY_HALL;
+  if(!Array.isArray(S.recents)) S.recents=[];
+  S.recents=S.recents.filter(validPoint).slice(0,5);
+}
+
+/* ---------- time ---------- */
+function torontoNow(){
+  var f=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  var p={}; f.formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
+  return {date:p.year+'-'+p.month+'-'+p.day, mins:(+p.hour%24)*60+(+p.minute)};
+}
+function dayNum(iso){ var a=iso.split('-').map(Number); return Math.round(Date.UTC(a[0],a[1]-1,a[2])/864e5); }
+function dateOf(n){ return new Date(n*864e5); }
+function fmtDate(n,opts){ opts.timeZone='UTC'; return dateOf(n).toLocaleDateString('en-CA',opts); }
+function clock(m){ var hh=Math.floor(m/60)%24, mm=m%60; return {t:(hh%12||12)+':'+(mm<10?'0':'')+mm, ap:hh<12?'am':'pm'}; }
+function span(a,b){ var x=clock(a), y=clock(b); return x.ap===y.ap ? x.t+'–'+y.t+' '+y.ap : x.t+' '+x.ap+'–'+y.t+' '+y.ap; }
+function at(m){ var x=clock(m); return x.t+' '+x.ap; }
+
+/* ---------- distance ---------- */
+function km(a,b,c,d){
+  var r=Math.PI/180, x=Math.sin((c-a)*r/2), y=Math.sin((d-b)*r/2);
+  return 12742*Math.asin(Math.sqrt(x*x+Math.cos(a*r)*Math.cos(c*r)*y*y));
+}
+function fmtKm(v){ return (v<10?v.toFixed(1):Math.round(v))+' km'; }
+function ageLabel(a,b){
+  if(a==null&&b==null) return 'All ages';
+  if(b==null) return 'Ages '+a+'+';
+  if(a==null) return 'Up to age '+b;
+  return 'Ages '+a+'–'+b;
+}
+
+/* ---------- data ---------- */
+function index(){
+  byDay=new Map();
+  var tc=D.cats.map(function(){return new Map();});
+  D.rows.forEach(function(r){
+    var c=D.courses[r[1]], m=tc[c[1]];
+    m.set(c[2],(m.get(c[2])||0)+r[6].length);
+    r[6].forEach(function(d){ var a=byDay.get(d); if(!a){a=[];byDay.set(d,a);} a.push(r); });
+  });
+  catTypes=tc.map(function(m){ return Array.from(m.entries()).sort(function(a,b){return b[1]-a[1];}).map(function(x){return x[0];}); });
+  lastDay=0; byDay.forEach(function(_,k){ if(k>lastDay) lastDay=k; });
+}
+
+/* ---------- filters ---------- */
+function chip(text,pressed,attrs){
+  var p={class:'chip',type:'button','aria-pressed':pressed?'true':'false',text:text},k;
+  for(k in attrs) p[k]=attrs[k];
+  return h('button',p);
+}
+var MOODS=['swim','skate','sports','fit','arts','youth','early'];
+var VERBS={'Swim':'swim','Skate':'skate','Sports':'play','Fitness':'sweat','Arts & Hobbies':'make stuff','Youth Spaces':'hang out','Early Years':'play with my kid'};
+function renderMood(){
+  $('.page').setAttribute('data-mood',S.cat);
+  $('#verb').textContent=VERBS[D.cats[S.cat]]||D.cats[S.cat].toLowerCase();
+}
+function renderOrigin(){
+  $('#origin-label').textContent=S.origin.label;
+}
+function renderCats(){
+  var box=$('#cats'); box.textContent='';
+  D.cats.forEach(function(c,i){ box.appendChild(chip(c,i===S.cat,{'data-cat':i,style:'--c:var(--'+(MOODS[i]||'swim')+')'})); });
+}
+function renderTypes(){
+  var box=$('#types'); box.textContent='';
+  var all=catTypes[S.cat], shown=all.slice(0,8);
+  S.types.forEach(function(t){ if(shown.indexOf(t)<0) shown.push(t); });
+  if(S.moreTypes) shown=all;
+  box.appendChild(chip('All',S.types.length===0,{'data-all':1}));
+  shown.forEach(function(t){ box.appendChild(chip(t,S.types.indexOf(t)>=0,{'data-type':t})); });
+  if(all.length>shown.length||S.moreTypes&&all.length>8)
+    box.appendChild(h('button',{class:'chip quiet',type:'button','data-more':1,text:S.moreTypes?'Fewer':'+'+(all.length-shown.length)+' more'}));
+}
+function renderDays(now){
+  var box=$('#days'); box.textContent='';
+  var t0=dayNum(now.date), base=t0-dayNum(D.start), i;
+  for(i=0;i<7;i++){
+    box.appendChild(h('button',{class:'day',type:'button','data-day':i,'aria-pressed':i===S.day?'true':'false',disabled:base+i>lastDay||base+i<0,
+      'aria-label':fmtDate(t0+i,{weekday:'long',month:'long',day:'numeric'})},
+      h('small',{text:i===0?'Today':fmtDate(t0+i,{weekday:'short'}).replace('.','')}),
+      h('span',{text:dateOf(t0+i).getUTCDate()})));
+  }
+}
+function renderOpts(){
+  var r=$('#radius'), s=$('#sort'); r.textContent=''; s.textContent='';
+  RADII.forEach(function(v){ r.appendChild(chip(v?v+' km':'Any',S.radius===v,{'data-r':v})); });
+  s.appendChild(chip('Nearest',S.sort==='near',{'data-s':'near'}));
+  s.appendChild(chip('Soonest',S.sort==='soon',{'data-s':'soon'}));
+  var a=$('#age'); if(document.activeElement!==a) a.value=S.age==null?'':S.age;
+}
+
+/* ---------- results ---------- */
+function activityName(){
+  if(S.types.length===1) return S.types[0].toLowerCase();
+  if(S.types.length>1) return 'matching '+D.cats[S.cat].toLowerCase();
+  return D.cats[S.cat].toLowerCase();
+}
+function dayPhrase(now){
+  if(S.day===0) return 'today';
+  if(S.day===1) return 'tomorrow';
+  return 'on '+fmtDate(dayNum(now.date)+S.day,{weekday:'long'});
+}
+function renderResults(now){
+  var box=$('#results'), sum=$('#summary'); box.textContent=''; sum.textContent='';
+  var today=dayNum(now.date)-dayNum(D.start), di=today+S.day, isToday=S.day===0;
+  var rows=byDay.get(di)||[], groups=new Map();
+  rows.forEach(function(r){
+    var c=D.courses[r[1]];
+    if(c[1]!==S.cat) return;
+    if(S.types.length&&S.types.indexOf(c[2])<0) return;
+    if(S.age!=null){ if(r[4]!=null&&S.age<r[4]) return; if(r[5]!=null&&S.age>r[5]) return; }
+    var g=groups.get(r[0]);
+    if(!g){ var L=D.locs[r[0]]; g={loc:L,dist:L[2]==null?null:km(S.origin.lat,S.origin.lng,L[2],L[3]),items:[]}; groups.set(r[0],g); }
+    g.items.push({r:r,c:c,past:isToday&&r[3]<=now.mins});
+  });
+  var all=Array.from(groups.values());
+  var within=S.radius?all.filter(function(g){return g.dist!=null&&g.dist<=S.radius;}):all.slice();
+  var ended=0;
+  within.forEach(function(g){ g.items.forEach(function(x){ if(x.past) ended++; }); });
+  if(!S.showPast) within=within.map(function(g){ return {loc:g.loc,dist:g.dist,items:g.items.filter(function(x){return !x.past;})}; }).filter(function(g){return g.items.length;});
+  within.forEach(function(g){
+    g.items.sort(function(a,b){return a.r[2]-b.r[2]||a.r[3]-b.r[3];});
+    var live=g.items.filter(function(x){return !x.past;});
+    g.next=live.length?live[0].r[2]:1e9;
+  });
+  var far=function(g){return g.dist==null?1e9:g.dist;};
+  within.sort(S.sort==='soon'?function(a,b){return a.next-b.next||far(a)-far(b);}:function(a,b){return far(a)-far(b);});
+
+  var n=0; within.forEach(function(g){n+=g.items.length;});
+  var where=S.radius?' within '+S.radius+' km':' across Toronto';
+  var line;
+  if(n) line=n+(n===1?' session':' sessions')+' at '+within.length+(within.length===1?' place':' places')+where+' '+dayPhrase(now);
+  else line='Nothing'+where+' '+dayPhrase(now);
+  sum.appendChild(h('p',{text:line}));
+  if(isToday&&ended) sum.appendChild(h('button',{class:'link',type:'button','data-act':'past',text:S.showPast?'Hide ended sessions':'Show '+ended+' that already ended'}));
+
+  if(!n){ box.appendChild(emptyState(all,di,now)); return; }
+
+  // one shared clock range so every strip lines up
+  var lo=360, hi=1320;
+  within.forEach(function(g){ g.items.forEach(function(x){ lo=Math.min(lo,Math.floor(x.r[2]/60)*60); hi=Math.max(hi,Math.ceil(x.r[3]/60)*60); }); });
+  var ctx={lo:lo,hi:hi,now:isToday?now.mins:null};
+  within.slice(0,S.limit).forEach(function(g){ box.appendChild(card(g,ctx)); });
+  if(within.length>S.limit) box.appendChild(h('button',{class:'chip more',type:'button','data-act':'more',text:'Show '+Math.min(30,within.length-S.limit)+' more places'}));
+}
+function emptyState(all,di,now){
+  var e=h('div',{class:'empty'});
+  if(di>lastDay||di<0){
+    add(e,h('p',{class:'big',text:'The schedule in this app does not reach that day.'}));
+    add(e,h('p',{text:'It covers '+fmtDate(dayNum(D.start),{month:'short',day:'numeric'})+' to '+fmtDate(dayNum(D.end),{month:'short',day:'numeric'})+'. It needs a refresh from the city feed.'}));
+    return e;
+  }
+  var open=all.filter(function(g){ return g.dist!=null&&g.items.some(function(x){return !x.past;}); }).sort(function(a,b){return a.dist-b.dist;});
+  add(e,h('p',{class:'big',text:'Rats! No '+activityName()+(S.radius?' within '+S.radius+' km':'')+' '+dayPhrase(now)+(S.age!=null?' for age '+S.age:'')+'.'}));
+  if(open.length&&S.radius){
+    add(e,h('p',{text:'The closest is '+open[0].loc[1]+', '+fmtKm(open[0].dist)+' away.'}));
+    var next=RADII.filter(function(v){return v&&v>S.radius&&v>=open[0].dist;})[0]||0;
+    add(e,h('div',{class:'row'},h('button',{class:'chip',type:'button','data-act':'radius','data-v':next,text:next?'Search within '+next+' km':'Search any distance'})));
+  }else if(S.day===0&&all.length){
+    add(e,h('p',{text:'Today’s sessions have all ended. Try tomorrow.'}));
+  }else{
+    add(e,h('p',{text:'Try another day, a different type, or clear the age.'}));
+  }
+  return e;
+}
+function card(g,ctx){
+  var L=g.loc, range=ctx.hi-ctx.lo;
+  var pct=function(m){return ((m-ctx.lo)/range*100).toFixed(2)+'%';};
+  var strip=h('div',{class:'strip'}), ticks=h('div',{class:'ticks'}), t;
+  g.items.forEach(function(x){ strip.appendChild(h('i',{class:x.past?'past':null,style:'left:'+pct(x.r[2])+';width:'+((x.r[3]-x.r[2])/range*100).toFixed(2)+'%'})); });
+  if(ctx.now!=null&&ctx.now>ctx.lo&&ctx.now<ctx.hi) strip.appendChild(h('b',{style:'left:'+pct(ctx.now)}));
+  for(t=Math.ceil((ctx.lo+60)/180)*180;t<=ctx.hi-60;t+=180){
+    var hh=t/60%24; ticks.appendChild(h('span',{style:'left:'+pct(t),text:(hh%12||12)+(hh<12?'a':'p')}));
+  }
+  var list=h('ul',{class:'sessions'});
+  g.items.forEach(function(x){
+    var r=x.r, tags=[];
+    if(ctx.now!=null&&!x.past){
+      if(r[2]<=ctx.now) tags.push(h('span',{class:'tag live',text:'On now, ends '+at(r[3])}));
+      else if(r[2]-ctx.now<=90) tags.push(h('span',{class:'tag soon',text:'In '+(r[2]-ctx.now)+' min'}));
+    }
+    tags.push(h('span',{class:'tag',text:ageLabel(r[4],r[5])}));
+    if(x.c[3]) tags.push(h('span',{class:'tag soon',text:'Reserve ahead'}));
+    list.appendChild(h('li',{class:x.past?'past':null},
+      h('span',{class:'time',text:span(r[2],r[3])}),
+      h('span',{class:'what'},h('span',{class:'name',text:x.c[0]}),tags)));
+  });
+  var meta=[L[4]]; if(L[6]===2) meta.push('Fully accessible'); else if(L[6]===1) meta.push('Partially accessible');
+  return h('article',{class:'place'},
+    h('div',{class:'place-head'},h('h3',{text:L[1]}),g.dist!=null?h('span',{class:'dist',text:fmtKm(g.dist)}):null),
+    h('p',{class:'meta',text:meta.filter(Boolean).join(' · ')}),
+    h('div',{class:'day-strip','aria-hidden':'true'},strip,ticks),
+    list,
+    h('div',{class:'links'},
+      h('a',{href:'https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id='+encodeURIComponent(L[0]),target:'_blank',rel:'noopener',text:'City page for this centre'}),
+      h('a',{href:'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(L[1]+', '+L[4]+', Toronto, ON'),target:'_blank',rel:'noopener',text:'Directions'}),
+      L[7]?h('span',{class:'phone',text:L[7]}):null));
+}
+function renderNotice(now){
+  var box=$('#notice'); box.textContent=''; box.hidden=true;
+  var age=dayNum(now.date)-dayNum(D.sourceUpdated||D.start);
+  if(dayNum(now.date)-dayNum(D.start)>lastDay){
+    box.hidden=false; add(box,h('span',{text:'This schedule ended '+fmtDate(dayNum(D.end),{month:'short',day:'numeric'})+'. It needs a refresh from the city feed.'}));
+  }else if(age>10){
+    box.hidden=false; add(box,h('span',{text:'This schedule is '+age+' days old. Recent changes by the city are missing.'}));
+  }else if(S.origin.isDefault){
+    box.hidden=false;
+    add(box,h('span',{text:'Distances are measured from City Hall until you set your own starting point.'}));
+    add(box,h('button',{type:'button','data-act':'origin',text:'Set starting point'}));
+  }
+}
+function renderFoot(){
+  var f=$('#foot'); f.textContent='';
+  var d=function(iso){return fmtDate(dayNum(iso),{month:'short',day:'numeric'});};
+  add(f,h('p',{text:'Schedules come from the City of Toronto open data feed published '+d(D.sourceUpdated||D.start)+' and run to '+d(D.end)+'. The city updates the feed weekly, so a same-day closure or cancellation will not appear here. Check the centre’s city page before you head out.'}));
+  add(f,h('p',{text:'Distances are straight-line. Postal code searches use the approximate middle of the area.'}));
+  add(f,h('p',{text:'An unofficial personal tool, not a City of Toronto service. Contains information licensed under the Open Government Licence – Toronto.'}));
+}
+function render(){
+  if(!D) return;
+  var now=torontoNow();
+  renderMood(); renderOrigin(); renderCats(); renderTypes(); renderDays(now); renderOpts();
+  renderNotice(now); renderResults(now);
+}
+
+/* ---------- starting point ---------- */
+var ABBR={street:'st',saint:'st',avenue:'ave',av:'ave',road:'rd',drive:'dr',crescent:'cres',court:'crt',ct:'crt',place:'pl',boulevard:'blvd',
+  gate:'gt',square:'sq',terrace:'ter',terr:'ter',gardens:'gdns',trail:'trl',circle:'crcl',cir:'crcl',grove:'grv',heights:'hts',pathway:'ptwy',
+  park:'pk',parkway:'pkwy',circuit:'crct',west:'w',east:'e',north:'n',south:'s'};
+var LONG={}; Object.keys(ABBR).forEach(function(k){ (LONG[ABBR[k]]=LONG[ABBR[k]]||[]).push(k); });
+function tokens(s){ return s.toLowerCase().replace(/[.,'’]/g,'').replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(Boolean); }
+function matchAt(qt,kt,off){
+  if(off+qt.length>kt.length) return false;
+  for(var i=0;i<qt.length;i++){
+    var q=qt[i], k=kt[off+i];
+    if(k===q||k===ABBR[q]) continue;
+    if(i===qt.length-1&&(k.indexOf(q)===0||(LONG[k]&&LONG[k].some(function(l){return l.indexOf(q)===0;})))) continue;
+    return false;
+  }
+  return true;
+}
+function ensurePlaces(){
+  if(!placesPromise) placesPromise=fetch('data/places.json').then(function(r){ if(!r.ok) throw new Error('places '+r.status); return r.json(); }).then(function(j){
+    j.stTok=j.streets.map(function(s){return tokens(s[0]);});
+    j.plTok=j.places.map(function(p){return tokens(p[0]);});
+    P=j; return j;
+  });
+  return placesPromise;
+}
+function locate(street,num){
+  var d=street[2], n=0, la=0, lo=0, pts=[], i;
+  for(i=0;i<d.length;i+=3){ n+=d[i]; la+=d[i+1]; lo+=d[i+2]; pts.push([n,la/P.scale,lo/P.scale]); }
+  var side=pts.filter(function(p){return (p[0]-num)%2===0;}); if(!side.length) side=pts;
+  var a=null, b=null;
+  for(i=0;i<side.length;i++){ if(side[i][0]<=num) a=side[i]; if(side[i][0]>=num){ b=side[i]; break; } }
+  if(a&&b&&a!==b&&b[0]!==a[0]){
+    var t=(num-a[0])/(b[0]-a[0]);
+    if(km(a[1],a[2],b[1],b[2])>1.5) return t<0.5?a:b;   // a gap in the street: snap, don't guess the middle
+    return [num,a[1]+t*(b[1]-a[1]),a[2]+t*(b[2]-a[2])];
+  }
+  return a||b;
+}
+function suggest(text){
+  var out=[], raw=text.trim(), hint='';
+  if(raw.length<2) return {list:out,hint:hint};
+  var pc=raw.toUpperCase().replace(/\s+/g,'').match(/^(M\d[A-Z])(\d[A-Z]\d)?$/);
+  if(pc){
+    var f=P.fsa.filter(function(x){return x[0]===pc[1];})[0];
+    if(f) out.push({label:pc[1]+' postal area',sub:'Approximate middle of the area',lat:f[1],lng:f[2]});
+    else hint='No match for that postal code. Try a street address.';
+    return {list:out,hint:hint};
+  }
+  var m=raw.match(/^(\d+)\s*[a-z]?\s+(.+)$/i), qt=tokens(m?m[2]:raw);
+  if(!qt.length) return {list:out,hint:hint};
+  var hits=[], i, off;
+  for(i=0;i<P.stTok.length;i++){
+    for(off=0;off<P.stTok[i].length;off++){
+      if(matchAt(qt,P.stTok[i],off)){ hits.push({i:i,rank:off*10+(P.stTok[i].length-qt.length)}); break; }
+    }
+  }
+  hits.sort(function(a,b){return a.rank-b.rank||P.streets[b.i][2].length-P.streets[a.i][2].length||(P.streets[a.i][0]<P.streets[b.i][0]?-1:1);});
+  if(m){
+    hits.slice(0,6).forEach(function(x){
+      var s=P.streets[x.i], p=locate(s,+m[1]);
+      if(p) out.push({label:m[1]+' '+s[0],sub:s[1]>=0?P.munis[s[1]]:'Street address',lat:p[1],lng:p[2]});
+    });
+  }else if(hits.length){
+    hint='For a street address, start with the number, like 500 '+P.streets[hits[0].i][0]+'.';
+  }
+  var kinds={n:'Neighbourhood',c:'Community centre',p:'Park'}, order={n:0,c:1,p:2}, ph=[];
+  var pq=tokens(raw);
+  for(i=0;i<P.plTok.length;i++){
+    var kt=P.plTok[i];
+    if(pq.every(function(q){return kt.some(function(k){return k.indexOf(q)===0;});}))
+      ph.push({i:i,rank:(kt[0].indexOf(pq[0])===0?0:10)+order[P.places[i][3]]+kt.length/100});
+  }
+  ph.sort(function(a,b){return a.rank-b.rank;});
+  ph.slice(0,m?2:6).forEach(function(x){ var p=P.places[x.i]; out.push({label:p[0],sub:kinds[p[3]]||'',lat:p[1],lng:p[2]}); });
+  if(!out.length&&!hint) hint='No match in Toronto. Try a street number and name, like 500 Danforth Ave.';
+  return {list:out,hint:hint};
+}
+function renderSugs(){
+  var ul=$('#sugs'), hint=$('#loc-hint'), text=$('#loc-input').value;
+  ul.textContent=''; hint.hidden=true; curSugs=[];
+  if(text.trim().length<2) return;
+  if(!P){
+    hint.hidden=false; hint.textContent='Loading Toronto addresses…';
+    ensurePlaces().then(renderSugs,function(){ hint.hidden=false; hint.textContent='The address list did not load. Reload the page to try again.'; });
+    return;
+  }
+  var res=suggest(text); curSugs=res.list;
+  res.list.forEach(function(s,i){
+    ul.appendChild(h('li',null,h('button',{type:'button','data-i':i},h('span',{class:'s-main',text:s.label}),h('span',{class:'s-sub',text:s.sub}))));
+  });
+  if(res.hint){ hint.hidden=false; hint.textContent=res.hint; }
+}
+function renderRecents(){
+  var box=$('#recents'); box.textContent=''; box.hidden=!S.recents.length;
+  if(!S.recents.length) return;
+  add(box,h('span',{class:'label',text:'Recent'}));
+  S.recents.forEach(function(r,i){ add(box,chip(r.label,false,{'data-recent':i})); });
+  add(box,h('button',{class:'link',type:'button','data-clear':1,text:'Clear'}));
+}
+function setOrigin(o,remember){
+  S.origin={label:o.label,lat:o.lat,lng:o.lng};
+  if(o.live) S.origin.live=true;
+  if(remember){
+    S.recents=[S.origin].concat(S.recents.filter(function(r){return r.label!==o.label;})).slice(0,5);
+  }
+  S.limit=30; saveState(); togglePanel(false); render();
+}
+function togglePanel(open){
+  var p=$('#loc-panel'), b=$('#origin-btn');
+  p.hidden=!open; b.setAttribute('aria-expanded',open?'true':'false');
+  $('#origin-change').textContent=open?'Close':'Change';
+  if(open){
+    ensurePlaces().catch(function(){});
+    renderRecents(); $('#loc-input').value=''; renderSugs();
+    try{ $('#loc-input').focus({preventScroll:true}); }catch(e){}
+  }
+}
+function geoAllowed(){
+  if(!('geolocation' in navigator)) return Promise.resolve(false);
+  try{ var pp=document.permissionsPolicy||document.featurePolicy; if(pp&&pp.allowsFeature&&!pp.allowsFeature('geolocation')) return Promise.resolve(false); }catch(e){}
+  if(!navigator.permissions||!navigator.permissions.query) return Promise.resolve(true);
+  return navigator.permissions.query({name:'geolocation'}).then(function(s){return s.state!=='denied';},function(){return true;});
+}
+function useGeo(silent){
+  var hint=$('#loc-hint');
+  if(!silent){ hint.hidden=false; hint.textContent='Finding you…'; }
+  navigator.geolocation.getCurrentPosition(function(pos){
+    setOrigin({label:'My current location',lat:pos.coords.latitude,lng:pos.coords.longitude,live:true},false);
+  },function(){
+    if(silent) return;
+    hint.hidden=false; hint.textContent='Your location is not available here. Type an address instead.';
+    $('#geo-btn').hidden=true;
+  },{enableHighAccuracy:false,timeout:10000,maximumAge:300000});
+}
+
+/* ---------- events ---------- */
+function on(sel,type,fn){ $(sel).addEventListener(type,fn); }
+function hit(e,attr){ var t=e.target.closest('['+attr+']'); return t&&!t.disabled?t:null; }
+function changed(){ S.limit=30; saveState(); render(); }
+on('#origin-btn','click',function(){ togglePanel($('#loc-panel').hidden); });
+on('#loc-input','input',renderSugs);
+on('#loc-input','keydown',function(e){ if(e.key==='Enter'&&curSugs.length){ e.preventDefault(); setOrigin(curSugs[0],true); } });
+on('#sugs','click',function(e){ var t=hit(e,'data-i'); if(t) setOrigin(curSugs[+t.getAttribute('data-i')],true); });
+on('#geo-btn','click',function(){ useGeo(false); });
+on('#recents','click',function(e){
+  var t=hit(e,'data-recent');
+  if(t){ setOrigin(S.recents[+t.getAttribute('data-recent')],true); return; }
+  if(hit(e,'data-clear')){ S.recents=[]; saveState(); renderRecents(); }
+});
+on('#cats','click',function(e){ var t=hit(e,'data-cat'); if(!t) return; S.cat=+t.getAttribute('data-cat'); S.types=[]; S.moreTypes=false; changed(); });
+on('#types','click',function(e){
+  var t;
+  if(hit(e,'data-all')){ S.types=[]; changed(); return; }
+  if(hit(e,'data-more')){ S.moreTypes=!S.moreTypes; render(); return; }
+  if((t=hit(e,'data-type'))){
+    var v=t.getAttribute('data-type'), i=S.types.indexOf(v);
+    if(i>=0) S.types.splice(i,1); else S.types.push(v);
+    changed();
+  }
+});
+on('#days','click',function(e){ var t=hit(e,'data-day'); if(!t) return; S.day=+t.getAttribute('data-day'); S.showPast=false; changed(); });
+on('#radius','click',function(e){ var t=hit(e,'data-r'); if(!t) return; S.radius=+t.getAttribute('data-r'); changed(); });
+on('#sort','click',function(e){ var t=hit(e,'data-s'); if(!t) return; S.sort=t.getAttribute('data-s'); changed(); });
+on('#age','input',function(){ var v=$('#age').value.trim(), n=parseInt(v,10); S.age=v!==''&&n>=0&&n<=110?n:null; changed(); });
+on('#summary','click',function(e){ if(hit(e,'data-act')){ S.showPast=!S.showPast; render(); } });
+on('#notice','click',function(e){ if(hit(e,'data-act')){ togglePanel(true); $('#origin-btn').scrollIntoView({block:'start'}); } });
+on('#results','click',function(e){
+  var t=hit(e,'data-act'); if(!t) return;
+  var a=t.getAttribute('data-act');
+  if(a==='radius'){ S.radius=+t.getAttribute('data-v'); changed(); }
+  else if(a==='more'){ S.limit+=30; render(); }
+});
+
+/* ---------- start ---------- */
+loadState();
+fetch('data/schedule.json').then(function(r){ if(!r.ok) throw new Error('schedule '+r.status); return r.json(); }).then(function(j){
+  D=j; index(); validate(); renderFoot(); render();
+  setInterval(function(){ if(!document.hidden&&S.day===0) render(); },60000);
+  geoAllowed().then(function(ok){
+    $('#geo-btn').hidden=!ok;
+    if(ok&&S.origin.live&&navigator.permissions&&navigator.permissions.query)
+      navigator.permissions.query({name:'geolocation'}).then(function(s){ if(s.state==='granted') useGeo(true); },function(){});
+  });
+}).catch(function(){
+  $('#summary').textContent='';
+  add($('#summary'),h('p',{text:'The schedule did not load. Reload the page to try again.'}));
+});
+})();
+</script>
