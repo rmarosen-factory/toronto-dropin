@@ -398,7 +398,7 @@ function renderOpts(){
 
 /* ---------- results ---------- */
 function activityName(){
-  if(S.types.length===1) return S.types[0].toLowerCase();
+  if(S.types.length===1) return /[a-z][A-Z]/.test(S.types[0])?S.types[0]:S.types[0].toLowerCase();
   if(S.types.length>1) return 'matching '+D.cats[S.cat].toLowerCase();
   return D.cats[S.cat].toLowerCase();
 }
@@ -486,20 +486,25 @@ function card(g,ctx){
       if(r[2]<=ctx.now) tags.push(h('span',{class:'tag live',text:'On now, ends '+at(r[3])}));
       else if(r[2]-ctx.now<=90) tags.push(h('span',{class:'tag soon',text:'In '+(r[2]-ctx.now)+' min'}));
     }
-    tags.push(h('span',{class:'tag',text:ageLabel(r[4],r[5])}));
+    tags.push(h('span',{class:'tag',text:x.c[4]||ageLabel(r[4],r[5])}));
     if(x.c[3]) tags.push(h('span',{class:'tag soon',text:'Reserve ahead'}));
     list.appendChild(h('li',{class:x.past?'past':null},
       h('span',{class:'time',text:span(r[2],r[3])}),
       h('span',{class:'what'},h('span',{class:'name',text:x.c[0]}),tags)));
   });
   var meta=[L[4]]; if(L[6]===2) meta.push('Fully accessible'); else if(L[6]===1) meta.push('Partially accessible');
+  // EarlyON centres carry two extra fields: the operator's website and short notes
+  var eo=L.length>8, web=function(u){return typeof u==='string'&&/^https?:\/\//i.test(u);};
+  if(eo&&Array.isArray(L[9])) meta=meta.concat(L[9]);
   return h('article',{class:'place'},
     h('div',{class:'place-head'},h('h3',{text:L[1]}),g.dist!=null?h('span',{class:'dist',text:fmtKm(g.dist)}):null),
     h('p',{class:'meta',text:meta.filter(Boolean).join(' · ')}),
     h('div',{class:'day-strip','aria-hidden':'true'},strip,ticks),
     list,
     h('div',{class:'links'},
-      h('a',{href:'https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id='+encodeURIComponent(L[0]),target:'_blank',rel:'noopener',text:'City page for this centre'}),
+      eo ? (web(D.earlyonPage)?h('a',{href:D.earlyonPage,target:'_blank',rel:'noopener',text:'City EarlyON page'}):null)
+         : h('a',{href:'https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id='+encodeURIComponent(L[0]),target:'_blank',rel:'noopener',text:'City page for this centre'}),
+      eo&&web(L[8])?h('a',{href:L[8],target:'_blank',rel:'noopener',text:'Centre website'}):null,
       h('a',{href:'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(L[1]+', '+L[4]+', Toronto, ON'),target:'_blank',rel:'noopener',text:'Directions'}),
       L[7]?h('span',{class:'phone',text:L[7]}):null));
 }
@@ -520,6 +525,7 @@ function renderFoot(){
   var f=$('#foot'); f.textContent='';
   var d=function(iso){return fmtDate(dayNum(iso),{month:'short',day:'numeric'});};
   add(f,h('p',{text:'Schedules come from the City of Toronto open data feed published '+d(D.sourceUpdated||D.start)+' and run to '+d(D.end)+'. The city updates the feed weekly, so a same-day closure or cancellation will not appear here. Check the centre’s city page before you head out.'}));
+  if(D.earlyonUpdated) add(f,h('p',{text:'EarlyON times are each centre’s regular weekly drop-in hours from the city’s EarlyON list, updated '+d(D.earlyonUpdated)+'. EarlyON is free, for children from birth to 6 with a parent or caregiver. The list does not say which program runs in each time slot, and centres can close for holidays and school breaks, so check with the centre first.'}));
   add(f,h('p',{text:'Distances are straight-line. Postal code searches use the approximate middle of the area.'}));
   add(f,h('p',{text:'An unofficial personal tool, not a City of Toronto service. Contains information licensed under the Open Government Licence – Toronto.'}));
 }

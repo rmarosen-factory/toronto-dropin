@@ -30,9 +30,16 @@ Your starting point and filters are saved only in your own browser.
 Schedules are a weekly snapshot, so same-day closures and cancellations do not
 appear. Check the centre's city page before heading out.
 
+EarlyON Child and Family Centres appear under Early Years. They are free, for
+children from birth to six with a parent or caregiver. The city publishes each
+centre's regular weekly drop-in hours, not dated sessions, so the app repeats
+those hours each week and skips Ontario public holidays. It cannot tell which
+program runs in a given time slot or when a centre closes for a school break.
+
 Contains information licensed under the
 [Open Government Licence – Toronto](https://open.toronto.ca/open-data-license/),
 from these City of Toronto Open Data sets: Registered Programs and Drop In
-Courses Offering, Parks and Recreation Facilities, Address Points (Municipal),
+Courses Offering, Parks and Recreation Facilities, EarlyON Child and Family
+Centres, Address Points (Municipal),
 Neighbourhoods, and Licensed Child Care Centres (used only to place postal
 code areas).

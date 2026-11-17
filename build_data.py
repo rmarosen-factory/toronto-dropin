@@ -8,6 +8,7 @@ Run weekly (the city refreshes the feed weekly):
 Sources (City of Toronto Open Data, Open Government Licence - Toronto):
   - Registered Programs and Drop In Courses Offering: Drop-in + Locations
   - Parks and Recreation Facilities (coordinates, phone)
+  - EarlyON Child and Family Centres (regular weekly drop-in hours)
 
 Downloads are treated as untrusted data: each goes into its own folder under
 .cache/, and this script only ever parses them as JSON.
@@ -30,7 +31,21 @@ RESOURCES = {
     "dropin": ("067b41e7-ac8a-4d3f-ad08-089f8cd70316", "dropin", "drop-in.json"),
     "locations": ("87f95a5a-184f-4df5-ad37-84bcc1ea99a9", "locations", "locations.json"),
     "facilities": ("f6cdcd50-da7b-4ede-8e60-c3cdba70b559", "facilities", "facilities.geojson"),
+    "earlyon": ("c02ccbd4-000f-49e3-a133-3f23c9bfa418", "earlyon", "earlyon.geojson"),
 }
+
+# EarlyON centres: free drop-in for children from birth to six with a parent
+# or caregiver. The city lists each centre's regular weekly drop-in hours, not
+# dated sessions and not which program runs in each slot.
+EARLYON_CAT = "Early Years"
+EARLYON_TYPE = "EarlyON"
+EARLYON_TITLE = "EarlyON drop-in"
+EARLYON_AGE_MAX = 6
+EARLYON_AGE_NOTE = "Ages 0–6 + caregiver"   # kept short: the tag does not wrap on a phone
+EARLYON_PAGE = ("https://www.toronto.ca/community-people/children-parenting/children-programs-activities/"
+                "child-family-programs-and-groups/child-family-programs/")
+EARLYON_MIN_CENTRES = 50   # fewer than this with readable hours means the file changed shape
+WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 # Top-level activity groups, in display order. Each section name in the feed
 # maps to one of these by prefix.
@@ -144,10 +159,173 @@ def geocode(streets, number, street_name):
     return None
 
 
+def parse_clock(text, is_end):
+    t = text.strip().lower()
+    if t == "noon":
+        return 720
+    if t == "midnight":
+        return 1440 if is_end else 0
+    m = re.match(r"^(\d{1,2})(?::(\d{2}))?\s*([ap])\.?\s*m\.?$", t)
+    if not m:
+        return None
+    hour, minute = int(m.group(1)), int(m.group(2) or 0)
+    if not 1 <= hour <= 12 or minute > 59:
+        return None
+    return (hour % 12 + (12 if m.group(3) == "p" else 0)) * 60 + minute
+
+
+def parse_hours(text):
+    """'Monday: 9:00 a.m. - noon ; 1:00 p.m. - 3:00 p.m. | Tuesday: ...'
+    -> ({weekday index: sorted [(start, end)]}, number of pieces not understood)"""
+    out, bad = {}, 0
+    for part in (text or "").split("|"):
+        day, sep, rest = part.partition(":")
+        if not sep:
+            bad += 1 if part.strip() else 0
+            continue
+        if day.strip() not in WEEKDAYS:
+            bad += 1
+            continue
+        spans = out.setdefault(WEEKDAYS.index(day.strip()), set())
+        for piece in rest.split(";"):
+            if not piece.strip():
+                continue
+            m = re.match(r"^(.+?)\s+-\s+(.+)$", piece.strip())
+            a = parse_clock(m.group(1), False) if m else None
+            b = parse_clock(m.group(2), True) if m else None
+            if a is None or b is None or not a < b:
+                bad += 1
+                continue
+            spans.add((a, b))
+    return {d: sorted(s) for d, s in out.items() if s}, bad
+
+
+def easter(year):
+    a, b, c = year % 19, year // 100, year % 100
+    d, e = b // 4, b % 4
+    g = (8 * b + 13) // 25
+    h = (19 * a + b - d - g + 15) % 30
+    j, k = c // 4, c % 4
+    m = (a + 11 * h) // 319
+    r = (2 * e + 2 * j - k - h + m + 32) % 7
+    month = (h - m + r + 90) // 25
+    return dt.date(year, month, (h - m + r + month + 19) % 32)
+
+
+def nth_monday(year, month, n):
+    first = dt.date(year, month, 1)
+    return first + dt.timedelta(days=(7 - first.weekday()) % 7 + 7 * (n - 1))
+
+
+def holidays(year):
+    """Ontario public holidays plus the August civic holiday, with the weekday
+    a weekend holiday is observed on. Centres keep regular hours otherwise."""
+    days = {
+        nth_monday(year, 2, 3),                                   # Family Day
+        easter(year) - dt.timedelta(days=2),                      # Good Friday
+        dt.date(year, 5, 24) - dt.timedelta(days=dt.date(year, 5, 24).weekday()),  # Victoria Day
+        nth_monday(year, 8, 1),                                   # Civic Holiday
+        nth_monday(year, 9, 1),                                   # Labour Day
+        nth_monday(year, 10, 2),                                  # Thanksgiving
+    }
+    for fixed in (dt.date(year, 1, 1), dt.date(year, 7, 1), dt.date(year, 12, 25), dt.date(year, 12, 26)):
+        days.add(fixed)
+        if fixed.weekday() >= 5:
+            d = fixed
+            while d.weekday() >= 5 or d in days:
+                d += dt.timedelta(days=1)
+            days.add(d)
+    return days
+
+
+def earlyon_name(name):
+    n = re.sub(r"\s+Child\s+(and|&)\s+Family\s+(Centre|Center|Ctr)\b\.?", "", name.strip(), flags=re.I)
+    n = re.sub(r"earlyon", "EarlyON", n, flags=re.I)
+    n = re.sub(r"\s+", " ", n).strip()
+    if "earlyon" not in n.lower() and "on y va" not in n.lower():
+        n += " EarlyON"
+    return n
+
+
+def web_link(url):
+    """The operator's website as a safe http(s) link, or '' if there is none."""
+    u = (none(url) or "").strip()
+    if not u or " " in u:
+        return ""
+    if not re.match(r"^https?://", u, flags=re.I):
+        u = "http://" + u
+    return u if re.match(r"^https?://[A-Za-z0-9.-]+\.[A-Za-z]{2,}(/\S*)?$", u) else ""
+
+
+def earlyon_notes(p, name):
+    notes = []
+    building = (none(p.get("buildingName")) or "").strip()
+    if p.get("located_in_school") == "Yes":
+        notes.append("In a school, may close on school holidays")
+    elif building and not building[0].isdigit():
+        b = building.lower()
+        generic = ("earlyon" in b or "child and family" in b or b == "commercial storefront")
+        if not generic and b not in name.lower() and name.lower().replace(" earlyon", "") not in b:
+            notes.append("In " + building)
+    if p.get("indigenous_program") == "Yes":
+        notes.append("Indigenous program")
+    if p.get("french_language_program") == "Yes":
+        notes.append("French-language program")
+    langs = []
+    for l in re.split(r"[;,]", none(p.get("languages")) or ""):
+        l = re.sub(r"\s*\([^)]*\)", "", l).split(" - ")[0].strip()
+        if l and l not in langs and l != "English":
+            langs.append(l)
+    if langs and not (langs == ["French"] and "French-language program" in notes):
+        notes.append("Also in " + ", ".join(langs[:4]))
+    return notes
+
+
+def add_earlyon(feed, start, last_offset, courses, loc_list, rows):
+    """Append EarlyON centres and their regular weekly drop-in hours, expanded
+    over the same dates the recreation feed covers."""
+    closed = set()
+    for y in range(start.year, (start + dt.timedelta(days=last_offset)).year + 1):
+        closed |= holidays(y)
+    by_weekday = collections.defaultdict(list)
+    for off in range(last_offset + 1):
+        d = start + dt.timedelta(days=off)
+        if d not in closed:
+            by_weekday[d.weekday()].append(off)
+
+    course = len(courses)
+    courses.append([EARLYON_TITLE, CATEGORIES.index(EARLYON_CAT), EARLYON_TYPE, 0, EARLYON_AGE_NOTE])
+    centres = unread = 0
+    for f in feed["features"]:
+        p = f["properties"]
+        hours, bad = parse_hours(none(p.get("dropinHours")))
+        unread += bad
+        try:
+            lat, lng = round(float(p["lat"]), 5), round(float(p["lng"]), 5)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if not hours or not (43.4 < lat < 44.0 and -79.8 < lng < -79.0):
+            continue
+        name = earlyon_name(none(p.get("program_name")) or "EarlyON")
+        phone = re.sub(r"\s+X\s+", " ext. ", (none(p.get("phone")) or "").strip())
+        loc = len(loc_list)
+        loc_list.append([to_int(p.get("loc_id")) or 0, name, lat, lng, (none(p.get("address")) or "").strip(),
+                         "", 0, phone, web_link(p.get("website")), earlyon_notes(p, name)])
+        centres += 1
+        for wd, spans in hours.items():
+            if by_weekday[wd]:
+                for a, b in spans:
+                    rows.append([loc, course, a, b, None, EARLYON_AGE_MAX, by_weekday[wd]])
+    if centres < EARLYON_MIN_CENTRES:
+        sys.exit("Only %d EarlyON centres had readable drop-in hours; refusing to publish without them" % centres)
+    return centres, unread
+
+
 def main():
     drop, drop_updated = fetch("dropin")
     locs, _ = fetch("locations")
     fac, _ = fetch("facilities")
+    earlyon, earlyon_updated = fetch("earlyon")
     streets = load_streets()
 
     loc_by_id = {to_int(r["Location ID"]): r for r in locs}
@@ -225,12 +403,17 @@ def main():
         groups.setdefault(key, set()).update(days)
 
     rows = [list(k) + [sorted(v)] for k, v in groups.items()]
+    last_offset = max(d for r in rows for d in r[6])
+    end = start + dt.timedelta(days=last_offset)
+    rec_rows = len(rows)
+    centres, unread = add_earlyon(earlyon, start, last_offset, courses, loc_list, rows)
     all_days = [d for r in rows for d in r[6]]
-    end = start + dt.timedelta(days=max(all_days))
 
     out = {
         "generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
         "sourceUpdated": drop_updated,
+        "earlyonUpdated": earlyon_updated,
+        "earlyonPage": EARLYON_PAGE,
         "start": start.isoformat(),
         "end": end.isoformat(),
         "cats": CATEGORIES,
@@ -244,6 +427,8 @@ def main():
 
     print("sessions: %d in %d rows | locations: %d | activities: %d" % (len(all_days), len(rows), len(loc_list), len(courses)))
     print("covers %s to %s | city feed updated %s" % (out["start"], out["end"], drop_updated))
+    print("EarlyON: %d centres with drop-in hours, %d weekly time slots, %d pieces of text not understood | list updated %s"
+          % (centres, len(rows) - rec_rows, unread, earlyon_updated))
     print("wrote %s (%.0f KB)" % (OUT, os.path.getsize(OUT) / 1024))
     if unplaced:
         print("no map point for: " + "; ".join(unplaced))
