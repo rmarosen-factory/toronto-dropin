@@ -1,0 +1,16 @@
+{
+  "name": "Toronto Drop-In Finder",
+  "short_name": "Drop-Ins",
+  "description": "Find City of Toronto drop-in swims, skates, sports and EarlyON hours near you. Unofficial.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E2F5F4",
+  "theme_color": "#3CCBDD",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

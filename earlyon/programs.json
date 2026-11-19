@@ -1,0 +1,3091 @@
+{
+ "about": "EarlyON session names and ages, read by hand from each agency's own calendar. See earlyon/README.md. ages are [from, up to] in months; age_label is what the app shows. Only in-person drop-ins are listed.",
+ "agencies": [
+  {
+   "agency": "SickKids Centre for Community Mental Health",
+   "calendar_page": "https://sickkidscmh.ca/garry-hurvitz-cmh/prevention-and-early-intervention-services/earlyon-child-and-family-centre/",
+   "source": "https://sickkidscmh.ca/wp-content/uploads/2026/11/EarlyONCalendar-Nov-Dec2026.pdf",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-12-20",
+   "closed": [
+    "2026-11-09"
+   ],
+   "left_out": [
+    "Registered: School Readiness (born in 2023) Tue 9-11:30; Baby Time at Bathurst/Finch Wed 1-3; Pause, Breathe, Restore",
+    "Virtual One-to-One Parent Support (Mon, Fri)",
+    "Abrazos y conexion con tu bebe (Fri 1-3, birth to 12 months): the calendar does not say drop-in or registered",
+    "Dec 21-23 'special schedule 9 to 3:30' and the Dec 24-31 closure: the entry stops on Dec 20 so those days fall back to the city's hours"
+   ],
+   "centres": [
+    {
+     "loc_id": 12546,
+     "name": "Main site, 1645 Sheppard Ave W",
+     "sessions": [
+      {
+       "title": "Family Fun",
+       "days": [
+        "Mon"
+       ],
+       "start": "11:00",
+       "end": "15:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Fun (indoors)",
+       "days": [
+        "Tue"
+       ],
+       "start": "12:00",
+       "end": "14:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Fun (outdoors)",
+       "days": [
+        "Tue"
+       ],
+       "start": "14:00",
+       "end": "15:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Baby Time",
+       "days": [
+        "Tue"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        12
+       ],
+       "age_label": "0–12 months"
+      },
+      {
+       "title": "Family Fun",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "15:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "School Readiness",
+       "days": [
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        36,
+        54
+       ],
+       "age_label": "36–54 months"
+      },
+      {
+       "title": "Little Movers",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        12,
+        30
+       ],
+       "age_label": "12–30 months"
+      },
+      {
+       "title": "Baby Sing and Play",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        12
+       ],
+       "age_label": "0–12 months"
+      },
+      {
+       "title": "Outdoor Family Fun",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Fun",
+       "days": [
+        "Thu"
+       ],
+       "start": "15:00",
+       "end": "18:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Fun (indoors)",
+       "dates": [
+        "2026-11-27",
+        "2026-12-04",
+        "2026-12-11",
+        "2026-12-18"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Fun (outdoors)",
+       "dates": [
+        "2026-11-27",
+        "2026-12-04",
+        "2026-12-11",
+        "2026-12-18"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 13423,
+     "name": "Bathurst/Finch Hub, 540 Finch Ave W",
+     "sessions": [
+      {
+       "title": "Family Fun",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "12:00",
+       "ages": [
+        0,
+        48
+       ],
+       "age_label": "0–48 months"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "Regent Park Community Health Centre",
+   "calendar_page": "https://regentparkchc.org/program/earlyon-drop-in-centre/",
+   "source": "https://regentparkchc.org/wp-content/uploads/2026/11/NOV-2026-RPCHC-EarlyON-Program-Calendar.pdf",
+   "read_on": "2026-11-19",
+   "from": "2026-11-16",
+   "to": "2026-11-30",
+   "closed": [],
+   "left_out": [
+    "Registration or referral only: School Readiness (SRP), Parents and Babies (up to six months, Tue), CCPT, CPNP, clinics",
+    "Family Resource Gym, Thu 9-11:30 at 402 Shuter St: the city lists that slot as registered, so unsure it is a drop-in",
+    "FRP at TPL (Tue 1-3, 269 Gerrard St E) and FRP Robertson House (Fri 9-12): not at a centre the app lists",
+    "Weeks of Nov 2 and Nov 9 were not read (already past on the day of reading)"
+   ],
+   "centres": [
+    {
+     "loc_id": 13648,
+     "name": "38 Regent St",
+     "sessions": [
+      {
+       "title": "Family Resource Drop-in",
+       "days": [
+        "Mon",
+        "Fri",
+        "Sat"
+       ],
+       "start": "09:00",
+       "end": "15:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Resource Drop-in",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Family Resource Drop-in",
+       "days": [
+        "Thu"
+       ],
+       "start": "11:30",
+       "end": "15:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Infant Drop-In",
+       "days": [
+        "Fri"
+       ],
+       "start": "13:00",
+       "end": "15:30",
+       "ages": [
+        0,
+        14
+       ],
+       "age_label": "0–14 months"
+      }
+     ]
+    },
+    {
+     "loc_id": 13649,
+     "name": "402 Shuter St (Regent Park Community Centre)",
+     "sessions": [
+      {
+       "title": "Family Resource Gym",
+       "days": [
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:30",
+       "ages": [
+        12,
+        72
+       ],
+       "age_label": "Ages 1–5"
+      }
+     ]
+    },
+    {
+     "loc_id": 13650,
+     "name": "101 Spruce St",
+     "sessions": [],
+     "why_empty": "The calendar shows only CCPT there, a registered training course for childcare providers, on the mornings the city lists as drop-in hours."
+    }
+   ]
+  },
+  {
+   "agency": "Toronto District School Board",
+   "calendar_page": "https://www.tdsb.on.ca/EarlyYears/Pre-School-Years/EarlyON-Child-and-Family-Centres",
+   "source": "https://www.tdsb.on.ca/Portals/0/docs/EarlyONsites_Schedule%20Sept%202026%20with%20MC.pdf",
+   "read_on": "2026-11-19",
+   "from": "2026-09-01",
+   "to": "2026-12-18",
+   "all_ages": true,
+   "closed": [],
+   "how_read": "One standing timetable for all 75 centres (re-issued about once a school year, not monthly). Each session is the board's 'Drop-in Program Hours' column. The last half hour of each day ('Community Support') is left out: the board lists it apart from drop-in hours. 'to' is the last school day before the winter break; the timetable itself gives no end date and no closure dates.",
+   "left_out": [
+    "'Community Support', the half hour after each day's drop-in hours"
+   ],
+   "centres": [
+    {
+     "loc_id": 13690,
+     "name": "Alexander Muir/Gladstone PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12629,
+     "name": "Bruce Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12628,
+     "name": "Carleton Village Jr & Sr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:10",
+       "end": "12:40"
+      }
+     ]
+    },
+    {
+     "loc_id": 12417,
+     "name": "Cedar Drive Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12627,
+     "name": "Chalkfarm PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "10:00",
+       "end": "13:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12457,
+     "name": "Charles E. Webster PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12626,
+     "name": "Charles G. Fraser Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12625,
+     "name": "Chester Le Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12624,
+     "name": "Church Street Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13032,
+     "name": "Crescent Town PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12594,
+     "name": "Dr. Rita Cox - Kina Minagok",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "13:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12623,
+     "name": "Driftwood PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12622,
+     "name": "Dundas Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 13038,
+     "name": "Eastview Junior PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12621,
+     "name": "Eatonville JS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12432,
+     "name": "Edgewood PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12431,
+     "name": "Elmbank JMA",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12620,
+     "name": "Essex PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12619,
+     "name": "Fairbank Memorial Comm.",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12617,
+     "name": "Firgrove PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12616,
+     "name": "Flemington PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "10:00",
+       "end": "14:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 13031,
+     "name": "Fraser Mustard Early Learning Academy",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12615,
+     "name": "General Mercer Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12436,
+     "name": "George Anderson PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12456,
+     "name": "George Webster Elem. Sch.",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12418,
+     "name": "Glen Ravine Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12613,
+     "name": "Grenoble PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:35",
+       "end": "13:05"
+      }
+     ]
+    },
+    {
+     "loc_id": 13034,
+     "name": "H.A. Halbert Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12612,
+     "name": "Highland Heights Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12611,
+     "name": "Indian Road Crescent Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12609,
+     "name": "J.R. Wilcox Comm. School",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13035,
+     "name": "John McCrae Sr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12597,
+     "name": "Jones Ave Adult Learning Centre - Pape Ave PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ],
+     "address": "540 Jones Ave",
+     "note": "The school board lists this centre at 540 Jones Ave; the city still lists 220 Langley Ave"
+    },
+    {
+     "loc_id": 13037,
+     "name": "Joseph Brant Sr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12607,
+     "name": "Kingslake PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12606,
+     "name": "Kingsview Village JS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12433,
+     "name": "Knob Hill Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12605,
+     "name": "Lord Dufferin Jr & Sr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "13:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12430,
+     "name": "Lynnwood Ht. Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13030,
+     "name": "Maple Leaf PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12604,
+     "name": "Market Lane PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "13:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12414,
+     "name": "Mason Road Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12603,
+     "name": "Military Trail PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12602,
+     "name": "Morse Street PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12601,
+     "name": "Nelson Mandela Park PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12598,
+     "name": "O'Connor PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13033,
+     "name": "Oakridge Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:30",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12596,
+     "name": "Parkdale Jr & Sr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12416,
+     "name": "Parkfield Jr School",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12595,
+     "name": "Pleasant PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "09:15",
+       "end": "13:45"
+      }
+     ]
+    },
+    {
+     "loc_id": 12419,
+     "name": "Portage Trail Jr Comm. Sch.",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12587,
+     "name": "Rockford PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:10",
+       "end": "12:40"
+      }
+     ]
+    },
+    {
+     "loc_id": 12586,
+     "name": "Roden Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12585,
+     "name": "Rose Avenue PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12657,
+     "name": "Roselands Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12434,
+     "name": "Roywood PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12584,
+     "name": "Ryerson Comm. School",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 13332,
+     "name": "Secord ES",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12435,
+     "name": "Sheppard PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12583,
+     "name": "Shirley Street School",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12438,
+     "name": "Shoreham Public Sports & Wellness Acad.",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13331,
+     "name": "Silverthorn Community School",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12582,
+     "name": "Sprucecourt PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12581,
+     "name": "St Margaret's PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "13:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 12454,
+     "name": "Taylor Creek PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12580,
+     "name": "The Elms JMS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13029,
+     "name": "Twentieth Street Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12437,
+     "name": "West Glen JS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12610,
+     "name": "Westmount JS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 13333,
+     "name": "Wexford PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 13334,
+     "name": "White Haven P.S.",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12579,
+     "name": "Willow Park Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:30",
+       "end": "12:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 12428,
+     "name": "Wilmington ES",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12577,
+     "name": "Woburn Jr PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "08:45",
+       "end": "13:15"
+      }
+     ]
+    },
+    {
+     "loc_id": 12576,
+     "name": "Yorkwoods PS",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+       ],
+       "start": "08:45",
+       "end": "12:15"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "Macaulay Centres for Children",
+   "calendar_page": "https://macaulaycentres.org/community-programs/early-years/early-years-programs/",
+   "source": "https://macaulaycentres.org/wp-content/uploads/November-2026.pdf",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-11-30",
+   "closed": [
+    "2026-11-10"
+   ],
+   "how_read": "Five-page PDF grid. Sessions marked '*Pre-registration required*' are left out; the rest are what the calendar calls drop-in programs ('first come, first served'). The file name changes each month, so pick up the link from calendar_page.",
+   "left_out": [
+    "Pre-registration required: Make the connections (Toddler), Extra Support Group, Specialized Building Language, Cultural Tales and Tunes, Early Parenting (0-12 months), Supporting Young Families, Mental Health Wellness Series, Kindergarten Journey, Handle With Care, Parent Support Program, Art Therapy",
+    "Rockcliffe Middle School (Play & Learn Tue and Thu 9-12:30): in the agency's calendar but not in the city's list of centres, so the app has no place for it",
+    "Weston Library (city id 14659): not in the agency's calendar and the city lists no hours for it",
+    "Parent Advocacy Check-In ('community visit', no place given) and the virtual Triple P Baby"
+   ],
+   "centres": [
+    {
+     "loc_id": 12562,
+     "name": "2700 Dufferin",
+     "sessions": [
+      {
+       "title": "Toddler Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "14:00",
+       "ages": [
+        12,
+        30
+       ],
+       "age_label": "1–2½ years"
+      },
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Mon"
+       ],
+       "start": "14:00",
+       "end": "18:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Baby & Me",
+       "days": [
+        "Tue"
+       ],
+       "start": "14:00",
+       "end": "16:30",
+       "ages": [
+        0,
+        12
+       ],
+       "age_label": "0–12 months"
+      },
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "16:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Fri",
+        "Sat"
+       ],
+       "start": "09:00",
+       "end": "12:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 8860,
+     "name": "Jane St Hub",
+     "sessions": [
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "16:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "16:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 14415,
+     "name": "Barbara Frum Library",
+     "sessions": [
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Thu",
+        "Fri"
+       ],
+       "start": "10:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 6351,
+     "name": "Annette Library",
+     "sessions": [
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Wed"
+       ],
+       "start": "10:30",
+       "end": "12:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Thu"
+       ],
+       "start": "14:00",
+       "end": "16:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 13732,
+     "name": "Falstaff",
+     "note": "The agency’s calendar gives the address as Falstaff Community Centre, 50 Falstaff Ave",
+     "sessions": [
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 14416,
+     "name": "Amesbury Community Centre",
+     "sessions": [
+      {
+       "title": "Play & Learn (Tagalog/English)",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:30",
+       "end": "12:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Move & Play",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:30",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 14661,
+     "name": "Keele St Hub",
+     "sessions": [
+      {
+       "title": "Play & Learn (Spanish/English)",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:30",
+       "end": "12:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 12503,
+     "name": "Joyce",
+     "sessions": [
+      {
+       "title": "Play & Learn",
+       "days": [
+        "Mon",
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "12:30"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "College-Montrose Children's Place",
+   "calendar_page": "https://cmcp.ca/program-calendar/",
+   "source": "https://cmcp.ca/program-calendar/ (one picture or PDF per site, November 2026)",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-11-30",
+   "closed": [],
+   "how_read": "One calendar per site, most of them pictures. CMCP's own sites name Infant and Toddler/Preschool drop-ins but give no ages for them, so those carry a label and no age limits. One-off events are left out.",
+   "left_out": [
+    "One-off events (nurse visits, toilet learning, book reading, participants' meetings, library trip)",
+    "Gooch FRP days at 3735 Dundas St W (Tue-Thu 9-3): same room as the Lambton EarlyON but not headed EarlyON on the calendar",
+    "Circle and snack times; the short activity blocks at TCCSA (its hours match the city's and are kept as plain drop-in hours)",
+    "Wed Nov 25 afternoon at the Main Site and Mon Nov 23 afternoon at St. Helen's: the regular program is suspended around a participants' meeting"
+   ],
+   "centres": [
+    {
+     "loc_id": 12548,
+     "name": "Main Site, 180 Shaw St",
+     "sessions": [
+      {
+       "title": "Toddler/Preschool Drop-in",
+       "days": [
+        "Tue",
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "12:30",
+       "age_label": "Toddlers & preschoolers"
+      },
+      {
+       "title": "Infant Drop-in",
+       "days": [
+        "Tue",
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "15:30",
+       "age_label": "Infants",
+       "babies": true
+      },
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "12:00"
+      },
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Wed"
+       ],
+       "start": "14:00",
+       "end": "18:00",
+       "except": [
+        "2026-11-25"
+       ]
+      },
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Fri",
+        "Sat"
+       ],
+       "start": "09:00",
+       "end": "13:00"
+      },
+      {
+       "title": "Crafternoons",
+       "days": [
+        "Sat"
+       ],
+       "start": "13:00",
+       "end": "15:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 6209,
+     "name": "St. Helen's Site, 66 Sheridan Ave",
+     "sessions": [
+      {
+       "title": "Toddler/Preschool Drop-in",
+       "days": [
+        "Mon",
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "age_label": "Toddlers & preschoolers"
+      },
+      {
+       "title": "Infant Drop-in",
+       "days": [
+        "Mon",
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "age_label": "Infants",
+       "babies": true,
+       "except": [
+        "2026-11-23"
+       ]
+      },
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "14:00"
+      },
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "17:00"
+      },
+      {
+       "title": "Kindergym Family Drop-in",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 13674,
+     "name": "Lambton, 3735 Dundas St W",
+     "sessions": [
+      {
+       "title": "Family Drop-in",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "17:30"
+      }
+     ]
+    },
+    {
+     "loc_id": 13675,
+     "name": "Cecil Community Centre",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Tue",
+        "Thu",
+        "Sat"
+       ],
+       "start": "10:00",
+       "end": "13:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 13677,
+     "name": "TCCSA",
+     "note": "This month’s flyer says 247 Spadina Ave, 4th floor; the city lists 302 Spadina Ave. Call first",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Tue"
+       ],
+       "start": "10:00",
+       "end": "12:00"
+      },
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Tue"
+       ],
+       "start": "13:00",
+       "end": "17:00"
+      },
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Fri"
+       ],
+       "start": "10:00",
+       "end": "12:00"
+      },
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Fri"
+       ],
+       "start": "13:00",
+       "end": "15:00"
+      }
+     ]
+    },
+    {
+     "loc_id": 13678,
+     "name": "Waterfront Neighbourhood Centre",
+     "sessions": [
+      {
+       "title": "Babies Drop In",
+       "days": [
+        "Mon",
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        36
+       ],
+       "age_label": "Ages 0–2",
+       "babies": true
+      },
+      {
+       "title": "Evening Drop In (Family Gym Night)",
+       "days": [
+        "Tue"
+       ],
+       "start": "17:00",
+       "end": "18:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Evening Drop In",
+       "days": [
+        "Wed"
+       ],
+       "start": "17:00",
+       "end": "19:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "College-Montrose Children's Place (BGC St. Alban's Club)",
+   "calendar_page": "https://www.stalbansclub.ca/earlyon",
+   "source": "https://www.stalbansclub.ca/earlyon (November and December 2026 PDFs)",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-12-20",
+   "closed": [],
+   "how_read": "Kept apart from the other College-Montrose sites because the club posts its own calendar, already out for December. The December calendar says closed Dec 21 to Jan 2; the entry stops on Dec 20.",
+   "left_out": [
+    "Daily themes (the two copies of the November calendar disagree on which day has which)"
+   ],
+   "centres": [
+    {
+     "loc_id": 13676,
+     "name": "St. Alban's Club, 843 Palmerston Ave",
+     "note": "The club’s page says registration is required. Ask before a first visit",
+     "sessions": [
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Mon",
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "12:30"
+      },
+      {
+       "title": "EarlyON drop-in hours",
+       "days": [
+        "Sat"
+       ],
+       "start": "09:30",
+       "end": "13:30"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "Malvern Family Resource Centre",
+   "calendar_page": "https://www.mfrc.org/childrens-program",
+   "source": "Fall 2026 EarlyON flyer (the 'Download Flyer' link under the EarlyON tab) and the public activity pages at https://app.amilia.com/store/en/mfrc/shop/programs",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-12-24",
+   "closed": [
+    "2026-11-09",
+    "2026-12-07",
+    "2026-12-08",
+    "2026-12-24"
+   ],
+   "note": "Sign up first for most programs here (free)",
+   "how_read": "One flyer for all sites, the same every week from September to December. The flyer is headed 'EarlyON Registered Programs' and says registration is required for all of them; only 'Where Friends Meet' is called a drop-in. The agency's catalogue offers each one as a free 'drop-in' to register for, so they are listed with the Reserve ahead tag rather than left out. Ages are not on the flyer: they are the wording on each activity's catalogue page, and sessions with no age wording carry none. Day, time and place agree between the two sources. The catalogue has no sessions on Dec 24, so that day is marked closed rather than left to the city's hours.",
+   "left_out": [
+    "Nature Detectives, Thu 9-11:30: the flyer says 1321 Neilson Road, the catalogue page says 90 Littles Road",
+    "For parents only: Growing Healthy Together Prenatal Program, Postnatal Workshop, Friday parenting workshops, Surrey Place appointments",
+    "Agnes Macphail P.S. (city id 12543): in the city's list but not on the flyer, the agency's site list or its catalogue, so it keeps the city's hours"
+   ],
+   "centres": [
+    {
+     "loc_id": 13490,
+     "name": "90 Littles Road",
+     "sessions": [
+      {
+       "title": "Fun with Shapes",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "reserve": true
+      },
+      {
+       "title": "Nature Detectives",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "reserve": true
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Active Fun (Gym)",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "reserve": true
+      },
+      {
+       "title": "Science Wonderland",
+       "dates": [
+        "2026-11-20",
+        "2026-11-27",
+        "2026-12-04",
+        "2026-12-18"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Where Friends Meet",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "11:30",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Community Champions",
+       "days": [
+        "Tue"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "reserve": true
+      },
+      {
+       "title": "Creative Art",
+       "days": [
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "ages": [
+        24,
+        84
+       ],
+       "age_label": "Ages 2–6",
+       "reserve": true
+      },
+      {
+       "title": "Letter Play and Learn",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "reserve": true
+      },
+      {
+       "title": "Family Time/Science Wonderland",
+       "days": [
+        "Tue"
+       ],
+       "start": "18:00",
+       "end": "19:30",
+       "reserve": true
+      },
+      {
+       "title": "Fun with F.U.D.G.E. (dads, uncles, grandfathers)",
+       "days": [
+        "Thu"
+       ],
+       "start": "18:00",
+       "end": "19:30",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 6244,
+     "name": "1321 Neilson Road",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "reserve": true
+      },
+      {
+       "title": "Toddler Fun",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        18,
+        30
+       ],
+       "age_label": "18–30 months",
+       "reserve": true
+      },
+      {
+       "title": "Bookmaking",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        24,
+        84
+       ],
+       "age_label": "Ages 2–6",
+       "reserve": true
+      },
+      {
+       "title": "Baby Wonderland",
+       "dates": [
+        "2026-11-20",
+        "2026-11-27",
+        "2026-12-04",
+        "2026-12-18"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        18
+       ],
+       "age_label": "0–18 months",
+       "reserve": true
+      },
+      {
+       "title": "Where Friends Meet",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu"
+       ],
+       "start": "11:30",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Letter Play and Learn",
+       "days": [
+        "Mon"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "reserve": true
+      },
+      {
+       "title": "Rhythm and Play",
+       "days": [
+        "Tue"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "reserve": true
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "reserve": true
+      },
+      {
+       "title": "Science Wonderland",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13411,
+     "name": "Milliken Park CC",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Fun with Numbers",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13962,
+     "name": "Macklin P.S.",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "dates": [
+        "2026-11-24",
+        "2026-12-01",
+        "2026-12-15"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Science Wonderland",
+       "dates": [
+        "2026-11-19",
+        "2026-11-26",
+        "2026-12-03",
+        "2026-12-10"
+       ],
+       "start": "09:00",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13367,
+     "name": "Woodside Sq. Library",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Tue"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13808,
+     "name": "Burrows Hall Library",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13706,
+     "name": "Malvern Library",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "dates": [
+        "2026-11-20",
+        "2026-11-27",
+        "2026-12-04",
+        "2026-12-18"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 13432,
+     "name": "Thomas L. Wells P.S.",
+     "sessions": [
+      {
+       "title": "Letter Play and Learn",
+       "dates": [
+        "2026-11-23",
+        "2026-11-30",
+        "2026-12-14"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "reserve": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "East Scarborough Boys and Girls Club",
+   "calendar_page": "https://esbgc.ca/how-we-help/earlyon-child-family-centres/",
+   "source": "https://esbgc.ca/wp-content/uploads/2026/11/WEBSITE-November-2026-Program-Calendar-for-All-Sites-1.pdf and the Calendar Descriptions PDF beside it",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-11-30",
+   "closed": [
+    "2026-11-09"
+   ],
+   "how_read": "Monthly calendar, one page per day, plus a descriptions PDF that gives the ages. Whether a program needs sign-up is not on the calendar; it was taken from each program's page in the club's public catalogue. Most say to just drop in. All Mornelle programs and Galloway's Gym Time and Saturday Together Time are filed as drop-in there but also show an Enroll button, so they carry the Reserve ahead tag to be safe.",
+   "left_out": [
+    "Registered: Circle of Friends (Galloway, Sat), Parent & Tot Yoga (Orchard Park), the Sleep Training workshop",
+    "Babies Morning Out at Mornelle: in the catalogue but not on the November calendar",
+    "Kids Club, parent consultations and public health Q&As (not sessions a family can come to on their own)"
+   ],
+   "centres": [
+    {
+     "loc_id": 6894,
+     "name": "Corvette EarlyON",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon",
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Fine Motor Fun",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "15:30",
+       "ages": [
+        30,
+        84
+       ],
+       "age_label": "2½–6 years"
+      },
+      {
+       "title": "Baby Music",
+       "days": [
+        "Thu"
+       ],
+       "start": "10:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        18
+       ],
+       "age_label": "0–18 months"
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Thu"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 12518,
+     "name": "Galloway EarlyON",
+     "sessions": [
+      {
+       "title": "Gym Time & Crafts",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Gym Time & Parachute Play",
+       "days": [
+        "Wed"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Gym Time & Sensory Play",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "12:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Sat"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Friends at Play",
+       "days": [
+        "Sat"
+       ],
+       "start": "11:30",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 12496,
+     "name": "Mornelle EarlyON",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:00",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Creative Tots",
+       "days": [
+        "Tue"
+       ],
+       "start": "09:00",
+       "end": "13:00",
+       "ages": [
+        18,
+        30
+       ],
+       "age_label": "18–30 months",
+       "reserve": true
+      },
+      {
+       "title": "Together Time",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:00",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      },
+      {
+       "title": "Rainbow Fun",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:00",
+       "end": "13:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6",
+       "reserve": true
+      }
+     ]
+    },
+    {
+     "loc_id": 14264,
+     "name": "Orchard Park EarlyON",
+     "sessions": [
+      {
+       "title": "Together Time",
+       "days": [
+        "Mon"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Friends at Play",
+       "days": [
+        "Mon",
+        "Tue",
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "16:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Friends at Play",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:30",
+       "end": "19:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Friends at Play",
+       "dates": [
+        "2026-11-27"
+       ],
+       "start": "09:30",
+       "end": "16:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Friends at Play",
+       "dates": [
+        "2026-11-20"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Baby Music",
+       "days": [
+        "Mon"
+       ],
+       "start": "13:30",
+       "end": "14:30",
+       "ages": [
+        0,
+        18
+       ],
+       "age_label": "0–18 months"
+      },
+      {
+       "title": "Play, Learn & Connect",
+       "days": [
+        "Tue",
+        "Wed"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Play, Learn & Connect",
+       "days": [
+        "Tue",
+        "Wed"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Gym Time",
+       "days": [
+        "Thu"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Rainbow Fun",
+       "dates": [
+        "2026-11-19",
+        "2026-11-26"
+       ],
+       "start": "13:00",
+       "end": "16:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      },
+      {
+       "title": "Babies at Play",
+       "days": [
+        "Fri"
+       ],
+       "start": "09:30",
+       "end": "11:30",
+       "ages": [
+        0,
+        18
+       ],
+       "age_label": "0–18 months"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "agency": "East Scarborough Boys and Girls Club (library programs)",
+   "calendar_page": "https://esbgc.ca/how-we-help/earlyon-child-family-centres/",
+   "source": "November 2026 Calendar Descriptions PDF on that page, which states each library program's run into December",
+   "read_on": "2026-11-19",
+   "from": "2026-11-01",
+   "to": "2026-12-24",
+   "closed": [
+    "2026-11-09"
+   ],
+   "how_read": "Kept apart from the club's own sites because the descriptions PDF gives these three programs' dates through mid-December (Port Union Mondays to Dec 14; Highland Creek and Guildwood Wednesdays to Dec 16). It says no registration is needed. 'to' runs past the last session so the city's generic hours do not reappear after each program's stated last date.",
+   "left_out": [],
+   "centres": [
+    {
+     "loc_id": 13425,
+     "name": "Port Union Library",
+     "sessions": [
+      {
+       "title": "Music & Movement",
+       "dates": [
+        "2026-11-23",
+        "2026-11-30",
+        "2026-12-07",
+        "2026-12-14"
+       ],
+       "start": "10:30",
+       "end": "12:30",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 13405,
+     "name": "Highland Creek Library",
+     "sessions": [
+      {
+       "title": "Music & Movement",
+       "dates": [
+        "2026-11-25",
+        "2026-12-02",
+        "2026-12-09",
+        "2026-12-16"
+       ],
+       "start": "13:00",
+       "end": "15:00",
+       "ages": [
+        0,
+        72
+       ],
+       "age_label": "Ages 0–6"
+      }
+     ]
+    },
+    {
+     "loc_id": 13693,
+     "name": "Guildwood Library",
+     "sessions": [
+      {
+       "title": "Babies in Playland",
+       "dates": [
+        "2026-11-25",
+        "2026-12-02",
+        "2026-12-09",
+        "2026-12-16"
+       ],
+       "start": "10:30",
+       "end": "12:00",
+       "ages": [
+        0,
+        18
+       ],
+       "age_label": "0–18 months"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

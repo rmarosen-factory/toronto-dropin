@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Home-screen icon: the raccoon lifeguard, goggles up. Full-bleed square so phones can crop it to any shape. -->
+  <rect width="512" height="512" fill="#3CCBDD"/>
+  <path d="M0 418 Q32 392 64 418 T128 418 T192 418 T256 418 T320 418 T384 418 T448 418 T512 418 V512 H0 Z" fill="#E2F5F4"/>
+  <g transform="translate(79 84) scale(2.95)">
+    <g stroke="#16213E" stroke-width="3" stroke-linejoin="round">
+      <path d="M16 52 L20 23 Q22 15 29 19 L50 33 Z" fill="#A3ABBB"/>
+      <path d="M104 52 L100 23 Q98 15 91 19 L70 33 Z" fill="#A3ABBB"/>
+    </g>
+    <path d="M24 42 L25.5 27 L39 35.5 Z" fill="#3A4157"/>
+    <path d="M96 42 L94.5 27 L81 35.5 Z" fill="#3A4157"/>
+    <path d="M60 31 C82 31 98 42 103 60 L115 73 L103 81 C97 97 80 106 60 106 C40 106 23 97 17 81 L5 73 L17 60 C22 42 38 31 60 31 Z" fill="#A3ABBB" stroke="#16213E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M60 57 C52 48 36 45 22 52 C15 56 12 64 15 72 L20 76 C30 70 50 68 60 66 C70 68 90 70 100 76 L105 72 C108 64 105 56 98 52 C84 45 68 48 60 57 Z" fill="#F4F6FA"/>
+    <path d="M55.5 62 Q60 36 64.5 62 Z" fill="#3A4157"/>
+    <path d="M60 62 C53 54 38 51 25 57 C18 60 15 68 18 75 C29 81 45 79 54 71 Q60 67 66 71 C75 79 91 81 102 75 C105 68 102 60 95 57 C82 51 67 54 60 62 Z" fill="#3A4157"/>
+    <ellipse cx="60" cy="87" rx="19" ry="13.5" fill="#F4F6FA"/>
+    <path d="M52 78 Q60 64 68 78 Z" fill="#F4F6FA"/>
+    <circle cx="42" cy="66" r="6.6" fill="#F4F6FA"/>
+    <circle cx="78" cy="66" r="6.6" fill="#F4F6FA"/>
+    <circle cx="43.4" cy="66.6" r="3.7" fill="#16213E"/>
+    <circle cx="76.6" cy="66.6" r="3.7" fill="#16213E"/>
+    <circle cx="44.6" cy="65.2" r="1.15" fill="#fff"/>
+    <circle cx="77.8" cy="65.2" r="1.15" fill="#fff"/>
+    <path d="M53.5 78 Q60 74.5 66.5 78 Q65.5 84.5 60 85.5 Q54.5 84.5 53.5 78 Z" fill="#16213E"/>
+    <path d="M60 85.5 V89.5 M52 90.5 Q56 95 60 89.5 Q64 95 68 90.5" fill="none" stroke="#16213E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="27" cy="93" r="4.8" fill="#FF7493" opacity=".55"/>
+    <circle cx="93" cy="93" r="4.8" fill="#FF7493" opacity=".55"/>
+    <g stroke="#16213E" stroke-width="3" stroke-linecap="round">
+      <path d="M15 52 Q60 30 105 52" fill="none" stroke-width="5"/>
+      <circle cx="45" cy="42" r="10" fill="#FFD447"/>
+      <circle cx="75" cy="42" r="10" fill="#FFD447"/>
+      <path d="M55 42 H65" fill="none"/>
+    </g>
+  </g>
+</svg>

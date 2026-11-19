@@ -15,11 +15,17 @@ An unofficial personal project. It is not a City of Toronto service.
   neighbourhood or centre name into a point on the map without calling any
   outside service. `build_places.py` rebuilds it (rarely needed; it downloads
   183 MB of address points).
+- `earlyon/programs.json` holds EarlyON session names and ages read by hand
+  from the agencies' own monthly calendars. See `earlyon/README.md`.
 - `build_site.py` wraps the page into a standalone website in `site/`.
+- `manifest.webmanifest`, `sw.js` and `icons/` let a phone keep the site on its
+  home screen and open it with no signal.
 
 Three pages share the one screen:
 
-- **Find** lists what is on near you for a chosen activity and day.
+- **Find** lists what is on near you for a chosen activity and day. Type the
+  age of who is going to hide sessions they cannot join, or switch on "Fully
+  accessible only" to keep to venues the city marks as fully accessible.
 - **Favourites** keeps places (tap the heart on a place) and single activities
   at a place (tap the round + beside a time). Places show everything on that
   day; activities show the next seven days.
@@ -30,6 +36,13 @@ Three pages share the one screen:
 
 Your starting point, filters, favourites and plan are saved only in your own
 browser, so they do not follow you to another phone or computer.
+
+## Put it on a phone's home screen
+
+Open the site on the phone. On an iPhone, tap Share in Safari, then "Add to
+Home Screen". On Android, open the browser menu and tap "Add to Home screen" or
+"Install app". It then opens full screen like an app and still opens with no
+signal, showing the last schedule it loaded.
 
 ## Run it locally
 
@@ -45,10 +58,15 @@ appear. Check the centre's city page before heading out.
 EarlyON Child and Family Centres appear under Early Years. They are free, for
 children from birth to six with a parent or caregiver. The city publishes each
 centre's regular weekly drop-in hours, not dated sessions, so the app repeats
-those hours each week and skips Ontario public holidays. It cannot tell which
-program runs in a given time slot (the city's own page says to contact centres
-for that, so baby-only or toddler times are not shown) or when a centre closes
-for a school break.
+those hours each week and skips Ontario public holidays. The city does not say
+which program runs in a given time slot or who it is for.
+
+For some agencies, session names and ages (baby-only times, toddler times) are
+read by hand from the agency's own monthly calendar and kept in
+`earlyon/programs.json`. Those cards carry a green note with the date the
+calendar was read, and only for the days that calendar covers. Everywhere else
+the card says to ask the centre. The accessible filter hides every EarlyON
+centre, because the city gives no accessibility details for them.
 
 Contains information licensed under the
 [Open Government Licence – Toronto](https://open.toronto.ca/open-data-license/),

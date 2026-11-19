@@ -51,7 +51,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .mast h1 span{white-space:nowrap;text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--act);text-decoration-thickness:3px;text-underline-offset:5px}
 .tag-line{margin:0;font-weight:700;font-size:16px;color:var(--ink-2);text-wrap:balance}
 .tag-line mark{display:inline-block;background:var(--act);color:var(--on-act);font-family:var(--display);font-weight:700;padding:1px 8px 0;border-radius:8px;transform:rotate(-2deg)}
-.mascot{flex:none;width:104px;height:auto;transform-origin:50% 90%;animation:bob 3.4s ease-in-out infinite}
+.mascot{flex:none;width:123px;height:auto;transform-origin:50% 90%;animation:bob 3.4s ease-in-out infinite}
 .mascot .acc{display:none}
 .page[data-mood="0"] .acc-0,.page[data-mood="1"] .acc-1,.page[data-mood="2"] .acc-2,.page[data-mood="3"] .acc-3,
 .page[data-mood="4"] .acc-4,.page[data-mood="5"] .acc-5,.page[data-mood="6"] .acc-6{display:block}
@@ -99,7 +99,13 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .day[aria-pressed="true"] small{background:var(--edge);color:var(--act)}
 .day:disabled{opacity:.4;cursor:default}
 .opts{display:flex;flex-wrap:wrap;gap:14px 22px}
-.age{width:82px;padding:5px 12px;border:2px solid var(--edge);border-radius:999px;background:var(--surface);font-size:14.5px;font-weight:700}
+.who{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:center;background:var(--surface);border:2px solid var(--edge);border-radius:18px;padding:9px 14px 10px;box-shadow:4px 4px 0 var(--act)}
+.who-q{font-family:var(--display);font-size:19px;font-weight:700;line-height:1.2}
+.age{width:94px;padding:5px 10px 4px;border:2px solid var(--edge);border-radius:999px;background:var(--bg);font-family:var(--display);font-size:19px;font-weight:700;text-align:center}
+.age::placeholder{color:var(--ink-2);opacity:1}
+.who.on .age{background:var(--act);color:var(--on-act)}
+.who-hint{grid-column:1/-1;margin:0;color:var(--ink-2);font-size:13.5px}
+.who-hint .link{color:var(--ink);text-decoration-color:var(--act);text-decoration-thickness:3px}
 
 /* results */
 .notice{background:var(--early);color:var(--on-act);border:2px solid var(--edge);border-radius:14px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between;font-weight:700;transform:rotate(-.5deg);box-shadow:3px 3px 0 var(--edge)}
@@ -107,6 +113,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .summary{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;padding-top:2px}
 .summary p{margin:0;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.25}
 .summary .link{font-size:14px;text-decoration-color:var(--act);text-decoration-thickness:3px}
+.summary p.hint{flex-basis:100%;font-family:var(--body);font-size:13.5px;font-weight:500;line-height:1.45}
 .results{display:flex;flex-direction:column;gap:18px}
 .place{background:var(--surface);border:2px solid var(--edge);border-radius:20px;padding:15px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:5px 5px 0 var(--act)}
 .place-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -130,6 +137,7 @@ a{color:var(--ink);font-weight:800;text-decoration-line:underline;text-decoratio
 .tag.live{background:var(--live-soft);color:var(--live)}
 .tag.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:5px;animation:blink 1.4s ease-in-out infinite}
 .tag.soon{background:var(--soon-soft);color:var(--soon)}
+.tag.ages{background:var(--sunken);background:color-mix(in srgb,var(--act) 42%,var(--surface));color:var(--ink);border:1.5px solid var(--edge);font-family:var(--display);font-size:12.5px;padding:1px 9px 0}
 @keyframes blink{50%{opacity:.25}}
 .links{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14.5px;border-top:2px dashed var(--sunken);padding-top:10px}
 .links .phone{color:var(--ink-2);user-select:all;font-weight:700}
@@ -169,6 +177,7 @@ a.chip{display:inline-block;text-decoration:none}
 .mini{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;padding-top:3px}
 .mini .link{text-decoration-color:var(--act);text-decoration-thickness:3px}
 .note{margin:0;font-size:13.5px;font-weight:700;background:var(--soon-soft);color:var(--soon);border-radius:10px;padding:6px 10px}
+.note.ok{background:var(--live-soft);color:var(--live)}
 .favs,.plan{display:flex;flex-direction:column;gap:14px}
 .sec{margin:6px 0 -6px;font-family:var(--display);font-size:20px;font-weight:700;line-height:1.2}
 .week{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -180,6 +189,9 @@ a.chip{display:inline-block;text-decoration:none}
 .toast{position:fixed;left:50%;bottom:max(16px, env(safe-area-inset-bottom, 0px));transform:translateX(-50%) rotate(-1deg);z-index:5;width:max-content;max-width:calc(100vw - 32px);
   background:var(--ink);color:var(--bg);border:2px solid var(--edge);border-radius:18px;padding:9px 16px;font-size:14.5px;font-weight:800;display:flex;gap:14px;align-items:center;box-shadow:3px 3px 0 var(--act)}
 .toast button{background:none;border:none;padding:0;color:inherit;font-weight:800;white-space:nowrap;text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.tip{background:var(--surface);border:2px dashed var(--edge);border-radius:16px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;font-size:14px}
+.tip p{margin:0;flex:1 1 220px}
+.tip strong{font-family:var(--display);font-size:15.5px}
 .foot{color:var(--ink-2);font-size:13px;max-width:65ch;display:flex;flex-direction:column;gap:6px}
 .foot p{margin:0}
 @media (prefers-reduced-motion:reduce){
@@ -191,13 +203,16 @@ a.chip{display:inline-block;text-decoration:none}
   .filters{gap:11px}
   .mast h1{font-size:27px}
   .tag-line{font-size:14.5px}
-  .mascot{width:84px}
+  .mascot{width:99px}
   .origin-btn{padding:8px 12px}
   .cats .chip{font-size:15.5px;padding:5px 11px 4px}
   .chip{font-size:13.5px;padding:4px 11px}
   .day small{font-size:10px;letter-spacing:0}
   .day span{font-size:19px}
   .opts{gap:11px 18px}
+  .who{padding:8px 12px 9px}
+  .who-q{font-size:17.5px}
+  .age{width:84px;font-size:18px}
   /* phone: time on its own line so the name and tags get the full width */
   .sessions li{grid-template-columns:minmax(0,1fr) auto}
   .sessions .time{grid-column:1;grid-row:1}
@@ -217,23 +232,38 @@ a.chip{display:inline-block;text-decoration:none}
         <h1>Toronto <span>Drop-In</span> Finder</h1>
         <p class="tag-line" id="tagline">Where can I just show up and <mark>swim</mark>?</p>
       </div>
-      <svg class="mascot" viewBox="0 -6 120 118" aria-hidden="true">
-        <g stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
-          <circle cx="28" cy="36" r="14" fill="var(--fur-dark)"/>
-          <circle cx="92" cy="36" r="14" fill="var(--fur-dark)"/>
-          <ellipse cx="60" cy="68" rx="46" ry="38" fill="var(--fur)"/>
+      <svg class="mascot" viewBox="-22 -6 142 118" aria-hidden="true">
+        <!-- a raccoon: ringed tail, pointed ears, cheek tufts and a bandit mask -->
+        <g fill="none">
+          <path d="M26 100 C2 104 -14 86 -10 64 C-8 54 -4 48 1 45" stroke="var(--edge)" stroke-width="25" stroke-linecap="round"/>
+          <path d="M26 100 C2 104 -14 86 -10 64 C-8 54 -4 48 1 45" stroke="var(--fur)" stroke-width="19" stroke-linecap="round"/>
+          <path d="M26 100 C2 104 -14 86 -10 64 C-8 54 -4 48 1 45" stroke="var(--fur-dark)" stroke-width="19" stroke-dasharray="9 10"/>
         </g>
-        <ellipse cx="41" cy="64" rx="18" ry="13" transform="rotate(-16 41 64)" fill="var(--fur-dark)"/>
-        <ellipse cx="79" cy="64" rx="18" ry="13" transform="rotate(16 79 64)" fill="var(--fur-dark)"/>
-        <ellipse cx="60" cy="84" rx="19" ry="14" fill="var(--fur-light)"/>
-        <circle cx="43" cy="64" r="7" fill="var(--fur-light)"/>
-        <circle cx="77" cy="64" r="7" fill="var(--fur-light)"/>
-        <circle cx="44.5" cy="65" r="3.6" fill="var(--edge)"/>
-        <circle cx="75.5" cy="65" r="3.6" fill="var(--edge)"/>
-        <ellipse cx="60" cy="77" rx="6.5" ry="4.8" fill="var(--edge)"/>
-        <path d="M51 86 Q60 94 69 86" fill="none" stroke="var(--edge)" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="24" cy="84" r="5.5" fill="var(--fit)" opacity=".55"/>
-        <circle cx="96" cy="84" r="5.5" fill="var(--fit)" opacity=".55"/>
+        <circle cx="1" cy="45" r="9.5" fill="var(--fur-dark)"/>
+        <g stroke="var(--edge)" stroke-width="3" stroke-linejoin="round">
+          <path d="M16 52 L20 23 Q22 15 29 19 L50 33 Z" fill="var(--fur)"/>
+          <path d="M104 52 L100 23 Q98 15 91 19 L70 33 Z" fill="var(--fur)"/>
+        </g>
+        <path d="M24 42 L25.5 27 L39 35.5 Z" fill="var(--fur-dark)"/>
+        <path d="M96 42 L94.5 27 L81 35.5 Z" fill="var(--fur-dark)"/>
+        <path d="M60 31 C82 31 98 42 103 60 L115 73 L103 81 C97 97 80 106 60 106 C40 106 23 97 17 81 L5 73 L17 60 C22 42 38 31 60 31 Z"
+          fill="var(--fur)" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M60 57 C52 48 36 45 22 52 C15 56 12 64 15 72 L20 76 C30 70 50 68 60 66 C70 68 90 70 100 76 L105 72 C108 64 105 56 98 52 C84 45 68 48 60 57 Z" fill="var(--fur-light)"/>
+        <path d="M55.5 62 Q60 36 64.5 62 Z" fill="var(--fur-dark)"/>
+        <path d="M60 62 C53 54 38 51 25 57 C18 60 15 68 18 75 C29 81 45 79 54 71 Q60 67 66 71 C75 79 91 81 102 75 C105 68 102 60 95 57 C82 51 67 54 60 62 Z" fill="var(--fur-dark)"/>
+        <ellipse cx="60" cy="87" rx="19" ry="13.5" fill="var(--fur-light)"/>
+        <path d="M52 78 Q60 64 68 78 Z" fill="var(--fur-light)"/>
+        <circle cx="42" cy="66" r="6.6" fill="var(--fur-light)"/>
+        <circle cx="78" cy="66" r="6.6" fill="var(--fur-light)"/>
+        <circle cx="43.4" cy="66.6" r="3.7" fill="var(--edge)"/>
+        <circle cx="76.6" cy="66.6" r="3.7" fill="var(--edge)"/>
+        <circle cx="44.6" cy="65.2" r="1.15" fill="#fff"/>
+        <circle cx="77.8" cy="65.2" r="1.15" fill="#fff"/>
+        <path d="M53.5 78 Q60 74.5 66.5 78 Q65.5 84.5 60 85.5 Q54.5 84.5 53.5 78 Z" fill="var(--edge)"/>
+        <path d="M60 85.5 V89.5 M52 90.5 Q56 95 60 89.5 Q64 95 68 90.5" fill="none" stroke="var(--edge)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M40 87 L27 85 M40 91 L28 94 M80 87 L93 85 M80 91 L92 94" fill="none" stroke="var(--edge)" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+        <circle cx="27" cy="93" r="4.8" fill="var(--fit)" opacity=".5"/>
+        <circle cx="93" cy="93" r="4.8" fill="var(--fit)" opacity=".5"/>
         <g class="acc acc-0" stroke="var(--edge)" stroke-width="3" stroke-linecap="round">
           <path d="M15 52 Q60 30 105 52" fill="none" stroke-width="5"/>
           <circle cx="45" cy="42" r="10" fill="var(--swim)"/>
@@ -293,12 +323,17 @@ a.chip{display:inline-block;text-decoration:none}
 
   <section class="filters" aria-label="Filters">
     <div class="group"><span class="label">Activity</span><div class="row cats" id="cats"></div></div>
+    <div class="who" id="who">
+      <label class="who-q" for="age">Age of who’s going</label>
+      <input class="age" id="age" type="number" inputmode="numeric" min="0" max="110" placeholder="Any" aria-describedby="age-hint">
+      <p class="who-hint" id="age-hint"></p>
+    </div>
     <div class="group"><span class="label">Type</span><div class="row" id="types"></div></div>
     <div class="group"><span class="label">Day</span><div class="days" id="days"></div></div>
     <div class="opts">
       <div class="group"><span class="label">Within</span><div class="row" id="radius"></div></div>
       <div class="group"><span class="label">Order</span><div class="row" id="sort"></div></div>
-      <div class="group"><label class="label" for="age">Age of who's going</label><input class="age" id="age" type="number" inputmode="numeric" min="0" max="110" placeholder="Any"></div>
+      <div class="group"><span class="label">Access</span><div class="row" id="access"></div></div>
     </div>
   </section>
 
@@ -308,6 +343,7 @@ a.chip{display:inline-block;text-decoration:none}
   <section class="favs" id="favs" aria-label="Favourites" hidden></section>
   <section class="plan" id="plan" aria-label="My plan" hidden></section>
 
+  <div class="tip" id="tip" hidden></div>
   <footer class="foot" id="foot"></footer>
   <div class="toast" id="toast" role="status" hidden></div>
 </div>
@@ -322,9 +358,9 @@ var D=null, byDay=new Map(), catTypes=[], lastDay=0;
 var P=null, placesPromise=null, curSugs=[];
 // favP: favourite places. favA: one activity at one place. plan: dated sessions the visitor picked.
 // All three are kept by stable names and ids, never by position in the data, because the data is rebuilt twice a week.
-var S={cat:0,types:[],day:0,radius:5,age:null,sort:'near',showPast:false,moreTypes:false,limit:30,origin:CITY_HALL,recents:[],
-  view:'find',favP:[],favA:[],plan:[],open:null,expand:{}};
-var SAVED=['cat','types','radius','age','sort','origin','recents','favP','favA','plan'];
+var S={cat:0,types:[],day:0,radius:5,age:null,acc:false,sort:'near',showPast:false,moreTypes:false,limit:30,origin:CITY_HALL,recents:[],
+  view:'find',favP:[],favA:[],plan:[],open:null,expand:{},noTip:false};
+var SAVED=['cat','types','radius','age','acc','sort','origin','recents','favP','favA','plan','noTip'];
 var SESS=new Map(), locByKey=new Map();
 // Inside a Claude artifact a page cannot hand over a calendar file, so only the Google link is offered there.
 var CAN_FILE=!(window.claude&&typeof window.claude.use==='function');
@@ -393,6 +429,7 @@ function validate(){
   if(RADII.indexOf(S.radius)<0) S.radius=5;
   if(S.sort!=='near'&&S.sort!=='soon') S.sort='near';
   if(!(typeof S.age==='number'&&S.age>=0&&S.age<=110)) S.age=null;
+  S.acc=S.acc===true; S.noTip=S.noTip===true;
   if(!validPoint(S.origin)) S.origin=CITY_HALL;
   if(!Array.isArray(S.recents)) S.recents=[];
   S.recents=S.recents.filter(validPoint).slice(0,5);
@@ -574,8 +611,15 @@ function renderOpts(){
   RADII.forEach(function(v){ r.appendChild(chip(v?v+' km':'Any',S.radius===v,{'data-r':v})); });
   s.appendChild(chip('Nearest',S.sort==='near',{'data-s':'near'}));
   s.appendChild(chip('Soonest',S.sort==='soon',{'data-s':'soon'}));
-  var a=$('#age'); if(document.activeElement!==a) a.value=S.age==null?'':S.age;
+  var x=$('#access'); x.textContent='';
+  x.appendChild(chip('Fully accessible only',S.acc,{'data-acc':1}));
+  var a=$('#age'), hint=$('#age-hint'); if(document.activeElement!==a) a.value=S.age==null?'':S.age;
+  $('#who').classList.toggle('on',S.age!=null);
+  hint.textContent='';
+  if(S.age==null) add(hint,'Type an age to hide sessions they can’t join. Use 0 for a baby under 1.');
+  else add(hint,['Only showing sessions open to '+ageWho()+'. ',h('button',{class:'link',type:'button','data-act':'clearage',text:'Show all ages'})]);
 }
+function ageWho(){ return S.age===0?'a baby under 1':S.age===1?'a 1-year-old':'age '+S.age; }
 
 /* ---------- results ---------- */
 function activityName(){
@@ -603,6 +647,13 @@ function renderResults(now){
   });
   var all=Array.from(groups.values());
   var within=S.radius?all.filter(function(g){return g.dist!=null&&g.dist<=S.radius;}):all.slice();
+  // the city marks a venue fully or partly accessible, or says nothing at all (every EarlyON centre is in that last group)
+  var hid={part:0,unknown:0};
+  if(S.acc){
+    within.forEach(function(g){ if(g.loc[6]===1) hid.part++; else if(g.loc[6]!==2) hid.unknown++; });
+    all=all.filter(function(g){return g.loc[6]===2;});
+    within=within.filter(function(g){return g.loc[6]===2;});
+  }
   var ended=0;
   within.forEach(function(g){ g.items.forEach(function(x){ if(x.past) ended++; }); });
   if(!S.showPast) within=within.map(function(g){ return {loc:g.loc,dist:g.dist,items:g.items.filter(function(x){return !x.past;})}; }).filter(function(g){return g.items.length;});
@@ -617,10 +668,17 @@ function renderResults(now){
   var n=0; within.forEach(function(g){n+=g.items.length;});
   var where=S.radius?' within '+S.radius+' km':' across Toronto';
   var line;
-  if(n) line=n+(n===1?' session':' sessions')+' at '+within.length+(within.length===1?' place':' places')+where+' '+dayPhrase(now);
-  else line='Nothing'+where+' '+dayPhrase(now);
+  if(n) line=n+(n===1?' session':' sessions')+' at '+within.length+(S.acc?' fully accessible':'')+(within.length===1?' place':' places')+where+' '+dayPhrase(now);
+  else line='Nothing'+(S.acc?' fully accessible':'')+where+' '+dayPhrase(now);
+  if(S.age!=null) line+=' for '+ageWho();
   sum.appendChild(h('p',{text:line}));
   if(isToday&&ended) sum.appendChild(h('button',{class:'link',type:'button','data-act':'past',text:S.showPast?'Hide ended sessions':'Show '+ended+' that already ended'}));
+  if(S.acc&&hid.part+hid.unknown){
+    var bits=[];
+    if(hid.part) bits.push(hid.part+' the city lists as partially accessible');
+    if(hid.unknown) bits.push(hid.unknown+' with no accessibility details from the city'+(D.cats[S.cat]==='Early Years'?', which includes every EarlyON centre':''));
+    sum.appendChild(h('p',{class:'hint',text:'Hidden: '+bits.join(' and ')+'.'}));
+  }
 
   if(!n){ box.appendChild(emptyState(all,di,now)); return; }
 
@@ -639,7 +697,7 @@ function emptyState(all,di,now){
     return e;
   }
   var open=all.filter(function(g){ return g.dist!=null&&g.items.some(function(x){return !x.past;}); }).sort(function(a,b){return a.dist-b.dist;});
-  add(e,h('p',{class:'big',text:'Rats! No '+activityName()+(S.radius?' within '+S.radius+' km':'')+' '+dayPhrase(now)+(S.age!=null?' for age '+S.age:'')+'.'}));
+  add(e,h('p',{class:'big',text:'Rats! No '+activityName()+(S.acc?' at a fully accessible place':'')+(S.radius?' within '+S.radius+' km':'')+' '+dayPhrase(now)+(S.age!=null?' for '+ageWho():'')+'.'}));
   if(open.length&&S.radius){
     add(e,h('p',{text:'The closest is '+open[0].loc[1]+', '+fmtKm(open[0].dist)+' away.'}));
     var next=RADII.filter(function(v){return v&&v>S.radius&&v>=open[0].dist;})[0]||0;
@@ -647,7 +705,7 @@ function emptyState(all,di,now){
   }else if(S.day===0&&all.length){
     add(e,h('p',{text:'Today’s sessions have all ended. Try tomorrow.'}));
   }else{
-    add(e,h('p',{text:'Try another day, a different type, or clear the age.'}));
+    add(e,h('p',{text:'Try another day, a different type'+(S.age!=null?', or clear the age':'')+(S.acc?', or turn off “Fully accessible only”':'')+'.'}));
   }
   return e;
 }
@@ -662,6 +720,14 @@ function dayStrip(blocks,lo,hi,nowM){
   return h('div',{class:'day-strip','aria-hidden':'true'},strip,ticks);
 }
 var EO_NOTE='Open drop-in hours for ages 0 to 6. The city does not list what runs when, like baby-only times, so ask the centre.';
+// Some EarlyON centres carry an 11th field: [calendar page, date it was read, first day covered, last day covered, 1 if board-wide all-ages].
+// It only counts on the days the calendar covers; outside them the card falls back to the city's plain hours.
+function eoRead(L,iso){ var i=L[10]; return Array.isArray(i)&&typeof iso==='string'&&iso>=i[2]&&iso<=i[3]?i:null; }
+function eoNote(i){
+  var when=fmtDate(dayNum(i[1]),{month:'short',day:'numeric'});
+  return i[4] ? 'Hours are from the school board’s own schedule, read '+when+'. The board lists every session as open to all ages, birth to 6.'
+              : 'Session names and ages are from this centre’s own calendar, read '+when+'. Calendars change, so check before you go.';
+}
 function card(g,ctx){
   var L=g.loc, lk=locKey(L), favP=favPAt(lk)>=0;
   // on the Favourites page a place lists every activity, so long days start folded
@@ -675,7 +741,7 @@ function card(g,ctx){
       if(r[2]<=ctx.now) tags.push(h('span',{class:'tag live',text:'On now, ends '+at(r[3])}));
       else if(r[2]-ctx.now<=90) tags.push(h('span',{class:'tag soon',text:'In '+(r[2]-ctx.now)+' min'}));
     }
-    tags.push(h('span',{class:'tag',text:ev.g}));
+    tags.push(h('span',{class:'tag'+(x.c[4]||r[4]!=null||r[5]!=null?' ages':''),text:ev.g}));
     if(x.c[3]) tags.push(h('span',{class:'tag soon',text:'Reserve ahead'}));
     if(planned) tags.push(h('span',{class:'tag mine',text:'In my plan'}));
     list.appendChild(h('li',{class:x.past?'past':null},
@@ -693,6 +759,7 @@ function card(g,ctx){
   var meta=[L[4]]; if(L[6]===2) meta.push('Fully accessible'); else if(L[6]===1) meta.push('Partially accessible');
   // EarlyON centres carry two extra fields: the operator's website and short notes
   var eo=L.length>8, web=function(u){return typeof u==='string'&&/^https?:\/\//i.test(u);};
+  var read=eo?eoRead(L,ctx.iso):null;
   if(eo&&Array.isArray(L[9])) meta=meta.concat(L[9]);
   return h('article',{class:'place'},
     h('div',{class:'place-head'},h('h3',{text:L[1]}),
@@ -700,13 +767,14 @@ function card(g,ctx){
         'aria-label':favP?'Remove '+L[1]+' from favourites':'Add '+L[1]+' to favourites'},icon('heart',favP)),
       g.dist!=null?h('span',{class:'dist',text:fmtKm(g.dist)}):null),
     h('p',{class:'meta',text:meta.filter(Boolean).join(' · ')}),
-    eo?h('p',{class:'note',text:EO_NOTE}):null,
+    eo?h('p',{class:'note'+(read?' ok':''),text:read?eoNote(read):EO_NOTE}):null,
     g.items.length?[dayStrip(g.items.map(function(x){return [x.r[2],x.r[3],x.past];}),ctx.lo,ctx.hi,ctx.now),list]:h('p',{class:'hint',text:ctx.none||''}),
     cap?h('button',{class:'link more',type:'button','data-do':'expand','data-key':lk,text:'Show all '+g.items.length+' here'}):null,
     h('div',{class:'links'},
       eo ? (web(D.earlyonPage)?h('a',{href:D.earlyonPage,target:'_blank',rel:'noopener',text:'City EarlyON page'}):null)
          : h('a',{href:'https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id='+encodeURIComponent(L[0]),target:'_blank',rel:'noopener',text:'City page for this centre'}),
-      eo&&web(L[8])?h('a',{href:L[8],target:'_blank',rel:'noopener',text:'Centre website'}):null,
+      read&&web(read[0])?h('a',{href:read[0],target:'_blank',rel:'noopener',text:read[4]?'School board’s schedule':'Centre’s calendar'})
+        :eo&&web(L[8])?h('a',{href:L[8],target:'_blank',rel:'noopener',text:'Centre website'}):null,
       h('a',{href:mapsUrl({n:L[1],a:L[4]}),target:'_blank',rel:'noopener',text:'Directions'}),
       L[7]?h('span',{class:'phone',text:L[7]}):null));
 }
@@ -823,7 +891,7 @@ function renderPlan(now){
       if(p.g) tags.push(h('span',{class:'tag',text:p.g}));
       if(day.items.some(function(q){ return q!==p&&q.s<p.e&&p.s<q.e; })) tags.push(h('span',{class:'tag soon',text:'Overlaps'}));
       if(rows&&!rows.some(function(r){ return r[0]===li&&r[2]===p.s&&r[3]===p.e&&D.courses[r[1]][0]===p.t; }))
-        tags.push(h('span',{class:'tag soon',text:'No longer in the city schedule'}));
+        tags.push(h('span',{class:'tag soon',text:'No longer in the schedule'}));
       add(list,h('li',{class:ended?'past':null},
         h('span',{class:'time',text:span(p.s,p.e)}),
         h('span',{class:'what'},h('span',{class:'name',text:p.t}),h('span',{class:'at',text:p.n}),tags),
@@ -852,11 +920,31 @@ function renderNotice(now){
     add(box,h('button',{type:'button','data-act':'origin',text:'Set starting point'}));
   }
 }
+/* ---------- home screen ---------- */
+// Android browsers hand over an install prompt that a button can open. iPhones only install from the Share menu.
+var installEvt=null;
+function standalone(){ return navigator.standalone===true||!!(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches); }
+function renderTip(){
+  var box=$('#tip'); box.textContent=''; box.hidden=true;
+  if(!CAN_FILE||S.noTip||S.view!=='find'||standalone()) return;
+  var ua=navigator.userAgent||'', ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1), how;
+  if(installEvt) how='';
+  else if(/Android/.test(ua)) how='Open your browser’s menu, then tap “Add to Home screen” or “Install app”. ';
+  else if(ios) how='Tap the Share button, then “Add to Home Screen”. ';
+  else return;
+  box.hidden=false;
+  add(box,h('p',null,h('strong',{text:'Keep this on your home screen. '}),how+'It opens like an app, even with no signal.'));
+  add(box,h('div',{class:'row'},
+    installEvt?h('button',{class:'chip',type:'button','data-tip':'install',text:'Add to home screen'}):null,
+    h('button',{class:'chip quiet',type:'button','data-tip':'hide',text:installEvt?'Not now':'Got it'})));
+}
+window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); installEvt=e; if(D) renderTip(); });
+window.addEventListener('appinstalled',function(){ installEvt=null; if(D) renderTip(); });
 function renderFoot(){
   var f=$('#foot'); f.textContent='';
   var d=function(iso){return fmtDate(dayNum(iso),{month:'short',day:'numeric'});};
   add(f,h('p',{text:'Schedules come from the City of Toronto open data feed published '+d(D.sourceUpdated||D.start)+' and run to '+d(D.end)+'. The city updates the feed weekly, so a same-day closure or cancellation will not appear here. Check the centre’s city page before you head out.'}));
-  if(D.earlyonUpdated) add(f,h('p',{text:'EarlyON times are each centre’s regular weekly drop-in hours from the city’s EarlyON list, updated '+d(D.earlyonUpdated)+'. Every EarlyON centre is free and for children from birth to 6 with a parent or caregiver. The city does not publish what runs in each time slot, such as baby-only or toddler times, and centres can close for holidays and school breaks, so check with the centre first.'}));
+  if(D.earlyonUpdated) add(f,h('p',{text:'EarlyON centres are free and for children from birth to 6 with a parent or caregiver. The city’s EarlyON list, updated '+d(D.earlyonUpdated)+', gives each centre’s regular weekly drop-in hours but not what runs in each time slot. Where a card has a green note, the session names and ages were read by hand from that agency’s own calendar on the date shown, and replace the city’s hours for the days that calendar covers. Everywhere else, ask the centre about baby-only or toddler times. Centres can close for holidays and school breaks, so check first.'}));
   add(f,h('p',{text:'Favourites and your plan are saved in this browser only. They will not show up on another phone or computer.'}));
   add(f,h('p',{text:'Distances are straight-line. Postal code searches use the approximate middle of the area.'}));
   add(f,h('p',{text:'An unofficial personal tool, not a City of Toronto service. Contains information licensed under the Open Government Licence – Toronto.'}));
@@ -865,7 +953,7 @@ function render(){
   if(!D) return;
   var now=torontoNow(), v=S.view;
   SESS=new Map();
-  renderMood(); renderTabs(); renderOrigin();
+  renderMood(); renderTabs(); renderOrigin(); renderTip();
   $('.origin').hidden=v==='plan';
   $('.filters').hidden=$('#summary').hidden=$('#results').hidden=v!=='find';
   $('#favs').hidden=v!=='favs'; $('#plan').hidden=v!=='plan';
@@ -1076,6 +1164,13 @@ on('#days','click',function(e){ var t=hit(e,'data-day'); if(!t) return; S.day=+t
 on('#radius','click',function(e){ var t=hit(e,'data-r'); if(!t) return; S.radius=+t.getAttribute('data-r'); changed(); });
 on('#sort','click',function(e){ var t=hit(e,'data-s'); if(!t) return; S.sort=t.getAttribute('data-s'); changed(); });
 on('#age','input',function(){ var v=$('#age').value.trim(), n=parseInt(v,10); S.age=v!==''&&n>=0&&n<=110?n:null; changed(); });
+on('#who','click',function(e){ if(hit(e,'data-act')){ S.age=null; $('#age').value=''; changed(); } });
+on('#tip','click',function(e){
+  var t=hit(e,'data-tip'); if(!t) return;
+  if(t.getAttribute('data-tip')==='install'&&installEvt){ var ev=installEvt; installEvt=null; ev.prompt(); renderTip(); return; }
+  S.noTip=true; saveState(); renderTip();
+});
+on('#access','click',function(e){ if(hit(e,'data-acc')){ S.acc=!S.acc; changed(); } });
 on('#summary','click',function(e){ if(hit(e,'data-act')){ S.showPast=!S.showPast; render(); } });
 on('#notice','click',function(e){ if(hit(e,'data-act')){ togglePanel(true); $('#origin-btn').scrollIntoView({block:'start'}); } });
 on('#results','click',function(e){

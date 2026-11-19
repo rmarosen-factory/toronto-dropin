@@ -10,6 +10,10 @@ Sources (City of Toronto Open Data, Open Government Licence - Toronto):
   - Parks and Recreation Facilities (coordinates, phone)
   - EarlyON Child and Family Centres (regular weekly drop-in hours)
 
+Plus earlyon/programs.json: session names and ages read by hand from the
+agencies' own monthly calendars (the city does not publish those). Where an
+agency's calendar covers a date, it replaces the city's generic hours.
+
 Downloads are treated as untrusted data: each goes into its own folder under
 .cache/, and this script only ever parses them as JSON.
 """
@@ -24,6 +28,7 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, ".cache")
 OUT = os.path.join(HERE, "data", "schedule.json")
+PROGRAMS = os.path.join(HERE, "earlyon", "programs.json")
 CKAN = "https://ckan0.cf.opendata.inter.prod-toronto.ca"
 
 RESOURCES = {
@@ -46,8 +51,14 @@ EARLYON_PAGE = ("https://www.toronto.ca/community-people/children-parenting/chil
                 "child-family-programs-and-groups/child-family-programs/")
 # The two school boards run almost half the centres and post their own EarlyON calendars.
 SCHOOL_BOARDS = {"toronto district school board": "TDSB", "toronto catholic district school board": "TCDSB"}
+EARLYON_BABY_TYPE = "EarlyON babies"        # sessions for babies only, so they have a chip of their own
+EARLYON_BABY_MONTHS = 18
 EARLYON_MIN_CENTRES = 50   # fewer than this with readable hours means the file changed shape
+# Websites in the city's list that no longer belong to the agency (checked by hand), and the page to link instead.
+# esbgc.net was redirecting to a gambling site on 2026-11-19; the club's real site is esbgc.ca.
+WEBSITE_FIXES = {"esbgc.net": "https://esbgc.ca/how-we-help/earlyon-child-family-centres/"}
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+SHORT_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 # Top-level activity groups, in display order. Each section name in the feed
 # maps to one of these by prefix.
@@ -256,7 +267,10 @@ def web_link(url):
         return ""
     if not re.match(r"^https?://", u, flags=re.I):
         u = "http://" + u
-    return u if re.match(r"^https?://[A-Za-z0-9.-]+\.[A-Za-z]{2,}(/\S*)?$", u) else ""
+    if not re.match(r"^https?://[A-Za-z0-9.-]+\.[A-Za-z]{2,}(/\S*)?$", u):
+        return ""
+    host = re.sub(r"^www\.", "", re.match(r"^https?://([^/]+)", u).group(1).lower())
+    return WEBSITE_FIXES.get(host, u)
 
 
 def earlyon_notes(p, name):
@@ -286,9 +300,106 @@ def earlyon_notes(p, name):
     return notes
 
 
-def add_earlyon(feed, start, last_offset, courses, loc_list, rows):
-    """Append EarlyON centres and their regular weekly drop-in hours, expanded
-    over the same dates the recreation feed covers."""
+def hhmm(text):
+    m = re.match(r"^(\d{1,2}):(\d{2})$", str(text))
+    if not m or int(m.group(1)) > 23 or int(m.group(2)) > 59:
+        raise ValueError("bad time %r" % (text,))
+    return int(m.group(1)) * 60 + int(m.group(2))
+
+
+def check_agency(ag):
+    """One agency's hand-read calendar, checked and tidied. Raises on anything
+    odd so a half-right entry is never published."""
+    page = web_link(ag["calendar_page"])
+    if not page:
+        raise ValueError("calendar_page is not a web address")
+    first, last = dt.date.fromisoformat(ag["from"]), dt.date.fromisoformat(ag["to"])
+    if last < first:
+        raise ValueError("'to' is before 'from'")
+    out = {
+        "agency": str(ag["agency"]), "page": page, "read": dt.date.fromisoformat(ag["read_on"]).isoformat(),
+        "from": first, "to": last, "all_ages": ag.get("all_ages") is True,
+        "note": re.sub(r"\s+", " ", str(ag.get("note") or "")).strip()[:140],   # shown on every one of its centres
+        "closed": {dt.date.fromisoformat(d) for d in ag.get("closed", [])}, "centres": [],
+    }
+    for c in ag["centres"]:
+        sessions = []
+        for x in c.get("sessions", []):
+            title = re.sub(r"\s+", " ", str(x["title"])).strip()
+            a, b = hhmm(x["start"]), hhmm(x["end"])
+            if not title or len(title) > 60 or not a < b:
+                raise ValueError("bad session %r" % (x,))
+            if bool(x.get("days")) == bool(x.get("dates")):
+                raise ValueError("%s: give weekdays or dates, not both" % title)
+            # ages: [from, up to] in months, used by the age filter. age_label is what the tag says; it may stand
+            # alone when a calendar names a group ("Infants") without giving its ages.
+            ages, label = x.get("ages"), str(x.get("age_label") or "").strip()
+            if ages is not None:
+                if len(ages) != 2 or not 0 <= ages[0] < ages[1] <= 216 or not label:
+                    raise ValueError("%s: ages need [from, up to] months and an age_label" % title)
+            if len(label) > 24:
+                raise ValueError("%s: age_label is too long for a tag" % title)
+            sessions.append({
+                "title": title, "start": a, "end": b, "ages": ages, "label": label,
+                "babies": x.get("babies") is True or (bool(ages) and ages[1] <= EARLYON_BABY_MONTHS),
+                "reserve": x.get("reserve") is True,   # the agency asks families to sign up first: gets the "Reserve ahead" tag
+                "days": [SHORT_DAYS.index(d) for d in x.get("days") or []],
+                "dates": [dt.date.fromisoformat(d) for d in x.get("dates") or []],
+                "except": {dt.date.fromisoformat(d) for d in x.get("except") or []},
+            })
+        addr = re.match(r"^(\d+)\s+(\S.*)$", str(c.get("address") or "").strip())   # set only when the agency's address differs from the city's
+        note = re.sub(r"\s+", " ", str(c.get("note") or "")).strip()
+        if len(note) > 140:
+            raise ValueError("note is too long")
+        out["centres"].append({"loc_id": int(c["loc_id"]), "sessions": sessions, "keep_city_hours": c.get("keep_city_hours") is True,
+                               "address": (int(addr.group(1)), addr.group(2)) if addr else None, "note": note})
+    return out
+
+
+def load_programs():
+    """{city loc_id: (agency, centre)} from earlyon/programs.json, plus notes on
+    any agency that was skipped because its entry did not check out."""
+    if not os.path.exists(PROGRAMS):
+        return {}, []
+    with open(PROGRAMS, encoding="utf-8") as f:
+        doc = json.load(f)
+    by_loc, skipped = {}, []
+    for ag in doc.get("agencies", []):
+        try:
+            entry = check_agency(ag)
+        except (KeyError, TypeError, ValueError) as e:
+            skipped.append("%s: %s" % (ag.get("agency", "?") if isinstance(ag, dict) else "?", e))
+            continue
+        for c in entry["centres"]:
+            by_loc[c["loc_id"]] = (entry, c)
+    return by_loc, skipped
+
+
+def age_bounds(ages):
+    """Months [from, up to] as the whole-year limits the page's age filter uses.
+    A child aged N is anywhere from 12N to 12N+11 months old."""
+    if not ages or (ages[0] <= 0 and ages[1] >= 72):
+        return None, EARLYON_AGE_MAX
+    lo = round((ages[0] - 11) / 12, 2)
+    return (lo if lo > 0 else None), round((ages[1] - 1) / 12, 2)
+
+
+def add_earlyon(feed, start, last_offset, courses, loc_list, rows, streets):
+    """Append EarlyON centres. Each gets its regular weekly drop-in hours from
+    the city, expanded over the dates the recreation feed covers, except on
+    dates covered by the agency's own calendar (earlyon/programs.json), where
+    the named sessions and their ages are used instead."""
+    programs, skipped = load_programs()
+    named = {}
+
+    def named_course(title, label, babies, reserve):
+        key = (title, label, babies, reserve)
+        if key not in named:
+            named[key] = len(courses)
+            courses.append([title, CATEGORIES.index(EARLYON_CAT), EARLYON_BABY_TYPE if babies else EARLYON_TYPE,
+                            1 if reserve else 0, label or EARLYON_AGE_NOTE])
+        return named[key]
+
     closed = set()
     for y in range(start.year, (start + dt.timedelta(days=last_offset)).year + 1):
         closed |= holidays(y)
@@ -300,7 +411,9 @@ def add_earlyon(feed, start, last_offset, courses, loc_list, rows):
 
     course = len(courses)
     courses.append([EARLYON_TITLE, CATEGORIES.index(EARLYON_CAT), EARLYON_TYPE, 0, EARLYON_AGE_NOTE])
-    centres = unread = 0
+    named[(EARLYON_TITLE, "", False, False)] = course   # an agency's plain all-ages drop-in is the same activity as the city's
+    centres = unread = read_centres = read_slots = 0
+    seen_ids, moved = set(), []
     for f in feed["features"]:
         p = f["properties"]
         hours, bad = parse_hours(none(p.get("dropinHours")))
@@ -309,21 +422,51 @@ def add_earlyon(feed, start, last_offset, courses, loc_list, rows):
             lat, lng = round(float(p["lat"]), 5), round(float(p["lng"]), 5)
         except (KeyError, TypeError, ValueError):
             continue
-        if not hours or not (43.4 < lat < 44.0 and -79.8 < lng < -79.0):
+        lid = to_int(p.get("loc_id")) or 0
+        agency, own = programs.get(lid, (None, None))
+        if not (hours or (own and own["sessions"])) or not (43.4 < lat < 44.0 and -79.8 < lng < -79.0):
             continue
+        seen_ids.add(lid)
         name = earlyon_name(none(p.get("program_name")) or "EarlyON")
         phone = re.sub(r"\s+X\s+", " ext. ", (none(p.get("phone")) or "").strip())
         loc = len(loc_list)
-        loc_list.append([to_int(p.get("loc_id")) or 0, name, lat, lng, (none(p.get("address")) or "").strip(),
-                         "", 0, phone, web_link(p.get("website")), earlyon_notes(p, name)])
+        entry = [lid, name, lat, lng, (none(p.get("address")) or "").strip(),
+                 "", 0, phone, web_link(p.get("website")), earlyon_notes(p, name)]
+        covered = set()
+        if agency and own["address"]:
+            pt = geocode(streets, own["address"][0], own["address"][1])
+            if pt:
+                entry[2], entry[3], entry[4] = pt[0], pt[1], "%d %s" % own["address"]
+            else:
+                moved.append("%s (%d %s)" % (name, own["address"][0], own["address"][1]))
+        if agency and (own["note"] or agency["note"]):
+            entry[9] = entry[9] + [own["note"] or agency["note"]]
+        if agency:
+            # where the calendar lives, when it was read, the dates it covers, and whether it is the board-wide "all ages" kind
+            entry.append([agency["page"], agency["read"], agency["from"].isoformat(), agency["to"].isoformat(), 1 if agency["all_ages"] else 0])
+            read_centres += 1
+            in_range = [off for off in range(last_offset + 1) if agency["from"] <= start + dt.timedelta(days=off) <= agency["to"]]
+            open_days = [off for off in in_range if start + dt.timedelta(days=off) not in closed | agency["closed"]]
+            if not own["keep_city_hours"]:
+                covered = set(in_range)
+            for x in own["sessions"]:
+                days = [off for off in open_days if start + dt.timedelta(days=off) not in x["except"]
+                        and ((start + dt.timedelta(days=off)).weekday() in x["days"] or start + dt.timedelta(days=off) in x["dates"])]
+                if days:
+                    lo, hi = age_bounds(x["ages"])
+                    rows.append([loc, named_course(x["title"], x["label"], x["babies"], x["reserve"]), x["start"], x["end"], lo, hi, days])
+                    read_slots += 1
+        loc_list.append(entry)
         centres += 1
         for wd, spans in hours.items():
-            if by_weekday[wd]:
+            days = [off for off in by_weekday[wd] if off not in covered]
+            if days:
                 for a, b in spans:
-                    rows.append([loc, course, a, b, None, EARLYON_AGE_MAX, by_weekday[wd]])
+                    rows.append([loc, course, a, b, None, EARLYON_AGE_MAX, days])
     if centres < EARLYON_MIN_CENTRES:
         sys.exit("Only %d EarlyON centres had readable drop-in hours; refusing to publish without them" % centres)
-    return centres, unread
+    missing = sorted(set(programs) - seen_ids)
+    return centres, unread, {"centres": read_centres, "slots": read_slots, "skipped": skipped, "missing": missing, "moved": moved}
 
 
 def main():
@@ -411,7 +554,7 @@ def main():
     last_offset = max(d for r in rows for d in r[6])
     end = start + dt.timedelta(days=last_offset)
     rec_rows = len(rows)
-    centres, unread = add_earlyon(earlyon, start, last_offset, courses, loc_list, rows)
+    centres, unread, own = add_earlyon(earlyon, start, last_offset, courses, loc_list, rows, streets)
     all_days = [d for r in rows for d in r[6]]
 
     out = {
@@ -434,6 +577,13 @@ def main():
     print("covers %s to %s | city feed updated %s" % (out["start"], out["end"], drop_updated))
     print("EarlyON: %d centres with drop-in hours, %d weekly time slots, %d pieces of text not understood | list updated %s"
           % (centres, len(rows) - rec_rows, unread, earlyon_updated))
+    print("EarlyON agency calendars: %d centres with named sessions and ages, %d session rows" % (own["centres"], own["slots"]))
+    for note in own["skipped"]:
+        print("  SKIPPED an agency in earlyon/programs.json: " + note)
+    if own["moved"]:
+        print("  could not place the agency's own address, kept the city's: " + "; ".join(own["moved"]))
+    if own["missing"]:
+        print("  in earlyon/programs.json but not in the city list (or no map point): %s" % own["missing"])
     print("wrote %s (%.0f KB)" % (OUT, os.path.getsize(OUT) / 1024))
     if unplaced:
         print("no map point for: " + "; ".join(unplaced))
